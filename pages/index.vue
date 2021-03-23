@@ -2,8 +2,9 @@
   <div class="container">
     <div>
       <Logo />
+      <Test />
       <h1 class="title">
-        SimpleNuxt
+        Hello boys
       </h1>
       <div class="links">
         <a
@@ -22,15 +23,16 @@
         >
           GitHub
         </a>
+        <nuxt-link to="/users/1" class="button--grey"> Users</nuxt-link>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
-export default Vue.extend({})
+export default Vue.extend({});
 </script>
 
 <style>
@@ -44,16 +46,8 @@ export default Vue.extend({})
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
