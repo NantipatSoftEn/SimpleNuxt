@@ -1,5 +1,12 @@
 <template>
-  <Card />
+  <b-container class="bv-example-row">
+    <b-row>
+      <b-col><Card /></b-col>
+      <b-col><Card /></b-col>
+      <b-col><Card /></b-col>
+      <b-col><Card /></b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script lang="ts">
