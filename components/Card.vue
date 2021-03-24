@@ -1,19 +1,18 @@
 <template>
   <div>
     <b-card
-      title="ประกายฟ้าบนฟ้า"
-      img-src="https://picsum.photos/600/300/?image=25"
+      title="ประกายแสงสีทอง"
+      img-src="https://placekitten.com/g/300/300"
       img-alt="Image"
       img-top
-      tag="article"
-      style="max-width: 30rem;"
-      class="mb-2"
     >
       <b-card-text>
-        เจ้าหญิงในแดนนินทรา English
+        นินจาต้องอ่านเบื้องหลังของเบื้องหลังให้ออก
       </b-card-text>
-
-      <b-button href="#" variant="primary">Go somewhere</b-button>
+      <b-button variant="outline-primary">Button</b-button>
+      <template #footer>
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </template>
     </b-card>
   </div>
 </template>

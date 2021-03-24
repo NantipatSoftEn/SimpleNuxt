@@ -2,13 +2,10 @@
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
-        id="input-group-1"
         label="Name:"
-        label-for="input-1"
         description="We'll never share your email with anyone else."
       >
         <b-form-input
-          id="input-1"
           v-model="form.name"
           type="text"
           placeholder="Enter Name"
@@ -18,8 +15,8 @@
 
       <b-form-group id="input-group-2" label="Facebook:" label-for="input-2">
         <b-form-input
-          id="input-2"
           v-model="form.facebook"
+          type="text"
           placeholder="Enter Facebook"
           required
         ></b-form-input>
@@ -27,18 +24,26 @@
 
       <b-form-group id="input-group-2" label="Instrgram:" label-for="input-2">
         <b-form-input
-          id="input-2"
           v-model="form.instrgram"
+          type="text"
           placeholder="Enter Instrgram"
           required
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="description:" label-for="input-2">
+      <b-form-group id="input-group-2" label="Description:" label-for="input-2">
         <b-form-input
-          id="input-2"
           v-model="form.description"
+          type="text"
           placeholder="Enter description"
+          required
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Age:" label-for="input-2">
+        <b-form-input
+          v-model="form.age"
+          type="number"
+          placeholder="Enter Age"
           required
         ></b-form-input>
       </b-form-group>
@@ -60,7 +65,8 @@ export default {
         name: "",
         facebook: "",
         instrgram: "",
-        description: ""
+        description: "",
+        age: 0
       },
       show: true
     };
@@ -77,6 +83,7 @@ export default {
       this.form.facebook = "";
       this.form.instrgram = "";
       this.form.description = "";
+      this.form.age = 0;
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
