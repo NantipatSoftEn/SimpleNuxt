@@ -1,12 +1,11 @@
 <template>
-  <div id="#app" class="container">
-    <h1>TEST</h1>
+  <div class="container font-display">
     <NavBar />
     <Nuxt />
   </div>
 </template>
-<style scoped>
-#app {
-  font-family: "Pangolin", cursive;
+<style>
+.font-display {
+  font-family: "Pangolin", "Niramit", cursive;
 }
 </style>
