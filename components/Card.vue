@@ -1,8 +1,8 @@
 <template>
   <div>
     <b-card
-      title="ประกายฟ้าในแดนราตรี"
-      img-src="https://picsum.photos/600/300/?image=25"
+      title="ประกายฟ้าบนฟ้า"
+      img-src="~/assets/img/mock1.png"
       img-alt="Image"
       img-top
       tag="article"
@@ -10,7 +10,7 @@
       class="mb-2"
     >
       <b-card-text>
-        เจ้าหญิงในแดนนินทรา
+        เจ้าหญิงในแดนนินทรา English
       </b-card-text>
 
       <b-button href="#" variant="primary">Go somewhere</b-button>
