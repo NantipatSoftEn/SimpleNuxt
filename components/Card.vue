@@ -2,7 +2,7 @@
   <div>
     <b-card
       title="ประกายฟ้าบนฟ้า"
-      img-src="~/assets/img/mock1.png"
+      img-src="https://picsum.photos/600/300/?image=25"
       img-alt="Image"
       img-top
       tag="article"
