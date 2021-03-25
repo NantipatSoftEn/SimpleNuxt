@@ -2,7 +2,7 @@
   <div>
     <b-card
       title="ประกายแสงสีทอง"
-      img-src="https://placekitten.com/g/300/300"
+      :img-src="require('~/assets/img/mock1.jpg')" 
       img-alt="Image"
       img-top
     >
@@ -16,3 +16,5 @@
     </b-card>
   </div>
 </template>
+
+
