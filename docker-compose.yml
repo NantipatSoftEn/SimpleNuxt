@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    volumes:
+      - .:/src
+    environment:
+      - APP_ENV=local
+      - APP_HOST=0.0.0.0
+      - APP_PORT=3000
+      - TZ=Asia/Bangkok
+    networks:
+      - backend
+    ports:
+      - 3000:3000
+    restart: always
+    working_dir: /src/app
+    command: yarn dev
+
+networks:
+  backend:
+    driver: bridge
