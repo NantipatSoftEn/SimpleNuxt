@@ -28,6 +28,12 @@ export default {
   },
   async fetch() {
     this.items = await fetch(firebaseAPI).then(res => res.json());
+  },
+  computed: {
+    filteredFruit() {
+      return this.fruit.slice(0, 3);
+    }
   }
+  // https://michaelnthiessen.com/loop-number-v-for/
 };
 </script>
