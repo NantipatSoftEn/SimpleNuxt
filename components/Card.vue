@@ -1,18 +1,35 @@
 <template>
   <div>
     <b-card
-      title="ประกายแสงสีทอง"
-      img-src="https://placekitten.com/g/300/300"
+      :title="name"
+      :img-src="require('~/assets/img/mock1.jpg')"
       img-alt="Image"
       img-top
     >
+      <b-card-text> {{ facebook }} {{ instrgram }} </b-card-text>
       <b-card-text>
-        นินจาต้องอ่านเบื้องหลังของเบื้องหลังให้ออก
+        {{ description }}
       </b-card-text>
-      <b-button variant="outline-primary">Button</b-button>
+
+      <b-button variant="outline-primary">แก้ไข</b-button>
       <template #footer>
         <small class="text-muted">Last updated 3 mins ago</small>
       </template>
     </b-card>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+  props: {
+    name: String,
+    facebook: String,
+    instrgram: String,
+    description: String,
+    age: Number
+  }
+};
+</script>

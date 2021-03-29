@@ -1,10 +1,7 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        label="Name:"
-        description="We'll never share your email with anyone else."
-      >
+      <b-form-group label="Name:" description="">
         <b-form-input
           v-model="form.name"
           type="text"
@@ -67,6 +64,7 @@
 
 <script>
 import axios from "axios";
+import firebaseAPI from "../constants/firebaseAPI";
 export default {
   data() {
     return {
@@ -83,14 +81,10 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      axios.post();
-      axios
-        .post(
-          "https://haram-nuxt-default-rtdb.firebaseio.com/girl.json",
-          this.form
-        )
-        .then(res => console.log(res));
+      this.form.age = parseInt(this.form.age);
+      axios.post(firebaseAPI, this.form).then(res => console.log(res));
       alert(JSON.stringify(this.form));
+      console.log(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();
