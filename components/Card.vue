@@ -7,8 +7,10 @@
       img-top
     >
       <b-card-text>
-        {{ facebook }} {{ instrgram }}
-        <i class="bi bi-facebook"></i>
+        <img src="~/assets/svg/facebook.svg" class="color-svg-facebook" />{{
+          facebook
+        }}
+        {{ instrgram }}
       </b-card-text>
       <b-card-text>
         {{ description }}

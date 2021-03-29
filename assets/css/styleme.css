@@ -1,0 +1,4 @@
+.color-svg-facebook {
+  filter: invert(47%) sepia(40%) saturate(6365%) hue-rotate(203deg)
+    brightness(112%) contrast(101%);
+}

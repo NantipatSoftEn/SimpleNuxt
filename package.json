@@ -17,8 +17,10 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.8.3",
+    "fibers": "^5.0.0",
     "firebase": "^8.3.1",
     "nuxt": "^2.14.12",
+    "sass-loader": "10",
     "vue": "^2.6.12"
   },
   "devDependencies": {

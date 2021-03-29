@@ -1,6 +1,6 @@
 <template>
   <b-container class="bv-example-row">
-    {{ $fetchState }}
+    <!-- {{ $fetchState }} -->
     <p v-if="$fetchState.pending">Fetching mountains...</p>
     <p v-else-if="$fetchState.error">An error occurred :(</p>
     <div v-else>
