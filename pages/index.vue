@@ -1,5 +1,5 @@
 <template>
-  <b-container class="bv-example-row">
+  <b-container class="bv-example-row" fluid="md">
     <!-- {{ $fetchState }} -->
     <p v-if="$fetchState.pending">Fetching mountains...</p>
     <p v-else-if="$fetchState.error">An error occurred :(</p>
@@ -8,7 +8,7 @@
         <b-col v-for="girl of items" :key="girl.key"
           ><Card
             :name="girl.name"
-            :facebook="girl.facebok"
+            :facebook="girl.facebook"
             :instrgram="girl.instrgram"
             :description="girl.description"
             :age="girl.age"

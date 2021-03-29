@@ -7,12 +7,15 @@
       img-top
     >
       <b-card-text>
-        <img src="~/assets/svg/facebook.svg" class="color-svg-facebook" />{{
-          facebook
-        }}
+        <img src="~/assets/svg/facebook.svg" />
+        {{ facebook }}
+      </b-card-text>
+      <b-card-text>
+        <img src="~/assets/svg/instagram.svg" />
         {{ instrgram }}
       </b-card-text>
       <b-card-text>
+        <img src="~/assets/svg/girl.svg" />
         {{ description }}
       </b-card-text>
 
