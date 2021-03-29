@@ -5,7 +5,7 @@
     <h1>Nuxt Mountains</h1>
     <ul>
       <li v-for="mountain of mountains" :key="mountain.key">
-        {{ mountain.title }}
+        {{ mountain.name }}
       </li>
     </ul>
     <button @click="$fetch">Refresh</button>
@@ -20,9 +20,9 @@ export default {
     };
   },
   async fetch() {
-    this.mountains = await fetch("https://api.nuxtjs.dev/mountains").then(res =>
-      res.json()
-    );
+    this.mountains = await fetch(
+      "https://haram-nuxt-default-rtdb.firebaseio.com/girl.json"
+    ).then(res => res.json());
   }
 };
 </script>

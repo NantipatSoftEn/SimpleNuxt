@@ -6,7 +6,10 @@
       img-alt="Image"
       img-top
     >
-      <b-card-text> {{ facebook }} {{ instrgram }} </b-card-text>
+      <b-card-text>
+        {{ facebook }} {{ instrgram }}
+        <i class="bi bi-facebook"></i>
+      </b-card-text>
       <b-card-text>
         {{ description }}
       </b-card-text>
