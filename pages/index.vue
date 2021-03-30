@@ -4,7 +4,7 @@
     <p v-if="$fetchState.pending">Fetching mountains...</p>
     <p v-else-if="$fetchState.error">An error occurred :(</p>
     <div v-else>
-      <b-row>
+      <b-row cols="3">
         <b-col v-for="girl of items" :key="girl.key"
           ><Card
             :name="girl.name"
@@ -28,11 +28,6 @@ export default {
   },
   async fetch() {
     this.items = await fetch(firebaseAPI).then(res => res.json());
-  },
-  computed: {
-    filteredFruit() {
-      return this.fruit.slice(0, 3);
-    }
   }
   // https://michaelnthiessen.com/loop-number-v-for/
 };
