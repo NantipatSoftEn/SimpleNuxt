@@ -1,11 +1,10 @@
-FROM node:15.12.0-alpine
-
-RUN apk --no-cache add curl g++ gcc libgcc libstdc++ linux-headers make python
-
-RUN curl -o- -L https://yarnpkg.com/install.sh | sh
+FROM mhart/alpine-node AS dependencies
 
 WORKDIR /app
 
-COPY . .
+COPY package.json .
+COPY yarn.lock .
 
-RUN yarn --frozen-lockfile
+RUN yarn install --frozen-lockfile
+
+COPY . .
