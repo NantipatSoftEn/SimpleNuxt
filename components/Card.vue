@@ -8,11 +8,11 @@
     >
       <b-card-text>
         <img src="~/assets/svg/facebook.svg" />
-        {{ facebook }}
+        <a href="https://www.w3schools.com"> {{ facebook }}</a>
       </b-card-text>
       <b-card-text>
         <img src="~/assets/svg/instagram.svg" />
-        {{ instrgram }}
+        <a href="https://www.w3schools.com"> {{ instrgram }}</a>
       </b-card-text>
       <b-card-text>
         <img src="~/assets/svg/girl.svg" />
