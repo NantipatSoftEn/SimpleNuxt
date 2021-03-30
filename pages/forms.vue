@@ -1,10 +1,7 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        label="Name:"
-        description="We'll never share your email with anyone else."
-      >
+      <b-form-group label="Name:" description="">
         <b-form-input
           v-model="form.name"
           type="text"
@@ -47,15 +44,15 @@
           required
         ></b-form-input>
       </b-form-group>
-      <b-form-group id="input-group-2" label="Image:" label-for="input-2">
+      <!-- <b-form-group id="input-group-2" label="Image:" label-for="input-2">
         <b-form-file
           v-model="file1"
           :state="Boolean(file1)"
           placeholder="Choose a file or drop it here..."
           drop-placeholder="Drop file here..."
         ></b-form-file>
-        <!-- <div class="mt-3">Selected file: {{ file1 ? file1.name : "" }}</div> -->
-      </b-form-group>
+
+      </b-form-group> -->
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
@@ -66,6 +63,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import firebaseAPI from "../constants/firebaseAPI";
 export default {
   data() {
     return {
@@ -82,7 +81,10 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
+      this.form.age = parseInt(this.form.age);
+      axios.post(firebaseAPI, this.form).then(res => console.log(res));
       alert(JSON.stringify(this.form));
+      console.log(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();

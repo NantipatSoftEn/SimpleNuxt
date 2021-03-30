@@ -1,15 +1,25 @@
 <template>
   <div>
     <b-card
-      title="ประกายแสงสีทอง"
-      :img-src="require('~/assets/img/mock1.jpg')" 
+      :title="name"
+      :img-src="require('~/assets/img/mock1.jpg')"
       img-alt="Image"
       img-top
     >
       <b-card-text>
-        นินจาต้องอ่านเบื้องหลังของเบื้องหลังให้ออก
+        <img src="~/assets/svg/facebook.svg" />
+        <a href="https://www.w3schools.com"> {{ facebook }}</a>
       </b-card-text>
-      <b-button variant="outline-primary">Button</b-button>
+      <b-card-text>
+        <img src="~/assets/svg/instagram.svg" />
+        <a href="https://www.w3schools.com"> {{ instrgram }}</a>
+      </b-card-text>
+      <b-card-text>
+        <img src="~/assets/svg/girl.svg" />
+        {{ description }}
+      </b-card-text>
+
+      <b-button variant="outline-primary">แก้ไข</b-button>
       <template #footer>
         <small class="text-muted">Last updated 3 mins ago</small>
       </template>
@@ -17,4 +27,17 @@
   </div>
 </template>
 
-
+<script>
+export default {
+  data() {
+    return {};
+  },
+  props: {
+    name: String,
+    facebook: String,
+    instrgram: String,
+    description: String,
+    age: Number
+  }
+};
+</script>

@@ -14,7 +14,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ["@/assets/css/styleme.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ["@/plugins/bootstrap-vue"],
@@ -36,7 +36,26 @@ export default {
     }
   },
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    [
+      "@nuxtjs/firebase",
+      {
+        config: {
+          apiKey: "AIzaSyDHi4Xzop-7s_BXgh4-HM_GkNT_6wSTSoU",
+          authDomain: "haram-nuxt.firebaseapp.com",
+          databaseURL: "https://haram-nuxt-default-rtdb.firebaseio.com",
+          projectId: "haram-nuxt",
+          storageBucket: "haram-nuxt.appspot.com",
+          messagingSenderId: "1096824363111",
+          appId: "1:1096824363111:web:7dbdae4a7c14bbcbe39cc2",
+          measurementId: "G-E90NY0GNXZ"
+        },
+        services: {
+          auth: true // Just as example. Can be any other service.
+        }
+      }
+    ]
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
