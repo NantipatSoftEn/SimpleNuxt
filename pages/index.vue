@@ -5,7 +5,7 @@
     <p v-else-if="$fetchState.error">An error occurred :(</p>
     <div v-else>
       <b-row cols="3">
-        <b-col v-for="girl of items" :key="girl.key"
+        <b-col v-for="girl of getAllGirls" :key="girl.key"
           ><Card
             :name="girl.name"
             :facebook="girl.facebook"
@@ -19,16 +19,20 @@
 </template>
 
 <script>
-import firebaseAPI from "../constants/firebaseAPI";
+import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
+
 export default {
   data() {
     return {
       items: []
     };
   },
-  async fetch() {
-    this.items = await fetch(firebaseAPI).then(res => res.json());
+  // async fetch() {
+  //   this.items = await fetch(firebaseAPI).then(res => res.json());
+  // }
+
+  computed: {
+    ...mapGetters(["getAllGirls"])
   }
-  // https://michaelnthiessen.com/loop-number-v-for/
 };
 </script>
