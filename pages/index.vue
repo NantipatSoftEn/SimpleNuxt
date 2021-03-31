@@ -32,6 +32,9 @@ export default {
   },
   computed: {
     ...mapGetters(["getAllGirls"])
+  },
+  methods: {
+    ...mapActions(["fetchFirebaseAPI"])
   }
 };
 </script>
