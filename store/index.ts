@@ -4,11 +4,12 @@ import girl from "./modules/girl";
 
 Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== "production";
+// export const state = () => ({
+//   counter: 0
+// });
 
-export const store = new Vuex.Store({
-  modules: {
-    girl
-  },
-  strict: debug
-});
+// export const mutations = {
+//   increment(state: any) {
+//     state.counter++;
+//   }
+// };

@@ -29,12 +29,12 @@ export default {
   },
   async fetch() {
     this.items = await fetch(firebaseAPI).then(res => res.json());
-  },
-  computed: {
-    ...mapGetters(["getAllGirls"])
-  },
-  methods: {
-    ...mapActions(["fetchFirebaseAPI"])
   }
+  // computed: {
+  //   ...mapGetters(["getAllGirls"])
+  // },
+  // methods: {
+  //   ...mapActions(["nuxtServerInit"])
+  // }
 };
 </script>
