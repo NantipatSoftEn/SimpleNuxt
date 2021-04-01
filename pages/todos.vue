@@ -11,19 +11,23 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
-    todos() {
-      return this.$store.state.todos.list;
-    }
+    // todos() {
+    //   return this.$store.state.todos.list;
+    // }
+    ...mapGetters({ todos: "todos/lists" })
   },
   methods: {
-    addTodo(e) {
-      this.$store.commit("todos/add", e.target.value);
-      e.target.value = "";
-    },
+    // addTodo(e) {
+    //   this.$store.commit("todos/add", e.target.value);
+    //   e.target.value = "";
+    // },
+    ...mapActions({
+      addTodo: "todos/addTodo"
+    }),
     ...mapMutations({
       toggle: "todos/toggle"
     })

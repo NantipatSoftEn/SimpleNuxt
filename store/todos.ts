@@ -16,3 +16,18 @@ export const mutations = {
     todo.done = !todo.done;
   }
 };
+
+export const getters = {
+  lists(state) {
+    console.log(`getters state`, state);
+    return state.list;
+  }
+};
+
+export const actions = {
+  addTodo({ commit }: { commit: Function }, e: Event) {
+    let text = (<HTMLInputElement>e.target).value;
+    commit("add", text);
+    text = "";
+  }
+};
