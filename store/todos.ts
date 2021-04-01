@@ -1,10 +1,10 @@
-// export const state = () => ({
-//   list: []
-// });
-
-export const state = {
+export const state = () => ({
   list: []
-};
+});
+
+// export const state = {
+//   list: []
+// };
 
 export type State = typeof state;
 export type Todo = {
@@ -29,7 +29,7 @@ export const mutations = {
 };
 
 export const getters = {
-  lists(state: State) {
+  lists(state: { list: Array<Todo> }) {
     return state.list;
   }
 };

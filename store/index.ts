@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import girl from "./modules/girl";
 
 Vue.use(Vuex);
 
