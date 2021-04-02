@@ -68,4 +68,5 @@ export default {
   //     }
   //   }
   // }
+  // transpileDependencies: ["vuex-module-decorators"]
 };
