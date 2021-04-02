@@ -29,7 +29,7 @@ export const mutations = {
 };
 
 export const getters = {
-  lists(state: { list: Array<Todo> }) {
+  lists(state: { list: Array<Todo> }): Array<Todo> {
     return state.list;
   }
 };
