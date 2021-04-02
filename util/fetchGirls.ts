@@ -1,6 +1,7 @@
-import firebaseAPI from "../constants/firebaseAPI";
+const firebaseAPI: string =
+  "https://haram-nuxt-default-rtdb.firebaseio.com/girl.json";
 
-function status(response: any) {
+function status(response: any): Promise<number> {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response);
   } else {
@@ -8,7 +9,7 @@ function status(response: any) {
   }
 }
 
-function json(response: any) {
+function json(response: any): Object {
   return response.json();
 }
 

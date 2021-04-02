@@ -3,12 +3,8 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-// export const state = () => ({
-//   counter: 0
-// });
+const Store = new Vuex.Store({
+  strict: false
+});
 
-// export const mutations = {
-//   increment(state: any) {
-//     state.counter++;
-//   }
-// };
+export default Store;
