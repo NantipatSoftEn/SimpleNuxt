@@ -1,45 +1,40 @@
 import {
   Module,
   VuexModule,
-  getModule,
   Mutation,
-  MutationAction
+  Action,
+  getModule
 } from "vuex-module-decorators";
-import { fetchTodosDecor } from "../../util/fetchTodosDecor";
-import store from "..";
-
+export type Todo = {
+  done: Boolean;
+  text: String;
+};
 @Module({
-  dynamic: true,
-  name: "Todos",
-  namespaced: true,
-  store
+  name: "TodosDecor",
+  stateFactory: true,
+  namespaced: true
 })
-class Todos extends VuexModule {
-  todos = [];
-  isLoadingTodos = false;
-
-  @MutationAction({
-    mutate: ["todos", "isLoadingTodos"],
-    rawError: true
-  })
-  async loadTodos({ commit }: { commit: Function }) {
-    try {
-      commit("setIsLoadingTodos", true);
-
-      const todos = await fetchTodosDecor();
-      return {
-        todos,
-        isLoadingTodos: false
-      };
-    } finally {
-      commit("setIsLoadingTodos", false);
-    }
-  }
+class TodosDecor extends VuexModule {
+  list: Array<Todo> = [];
 
   @Mutation
-  setIsLoadingTodos(isLoading: boolean) {
-    this.isLoadingTodos = isLoading;
+  add(text: String) {
+    this.list.push({
+      text,
+      done: false
+    });
+  }
+
+  // @Mutation
+  // toggle(todo: Todo) {
+  //   todo.done = !todo.done;
+  // }
+
+  @Action({ commit: `add` })
+  addTodo(e: Event) {
+    //this.context.commit("add", text);
+    return (<HTMLInputElement>e.target).value;
   }
 }
 
-export default getModule(Todos);
+export default getModule(TodosDecor);
