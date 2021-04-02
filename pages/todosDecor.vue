@@ -1,9 +1,9 @@
 <template>
   <ul>
-    <!-- <li v-for="todo in todos" :key="todo.text">
+    <li v-for="todo in todos" :key="todo.text">
       <input :checked="todo.done" @change="toggle(todo)" type="checkbox" />
       <span :class="{ done: todo.done }">{{ todo.text }}</span>
-    </li> -->
+    </li>
     <li>
       <input @keyup.enter="addTodo" placeholder="What needs to be done?" />
     </li>
@@ -11,15 +11,22 @@
 </template>
 
 <script>
-// import TodosStore from "../store/modules/todos-decor";
+import Store, { TodosDecorStore } from "@/store";
 
 export default {
   computed: {
-    // todos: () => {
-    //   return TodosStore.list;
-    // }
+    todos: () => {
+      console.log(`TodosDecorStore.list`, TodosDecorStore.list);
+
+      return TodosDecorStore.list;
+    }
   },
-  methods: {}
+  methods: {
+    addTodo: e => {
+      TodosDecorStore.addTodo(e);
+      e.target.value = "";
+    }
+  }
 };
 </script>
 

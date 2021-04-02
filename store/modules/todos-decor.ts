@@ -10,15 +10,17 @@ export type Todo = {
   text: String;
 };
 @Module({
-  name: "TodosDecor",
-  stateFactory: true,
-  namespaced: true
+  name: "todos"
+  // stateFactory: true,
+  // namespaced: true
 })
-class TodosDecor extends VuexModule {
+export default class TodosMoud extends VuexModule {
   list: Array<Todo> = [];
 
   @Mutation
   add(text: String) {
+    console.log(`add ${text}`);
+
     this.list.push({
       text,
       done: false
@@ -30,11 +32,13 @@ class TodosDecor extends VuexModule {
   //   todo.done = !todo.done;
   // }
 
-  @Action({ commit: `add` })
+  @Action
   addTodo(e: Event) {
-    //this.context.commit("add", text);
-    return (<HTMLInputElement>e.target).value;
+    let text = (<HTMLInputElement>e.target).value;
+    this.context.commit("add", text);
+    // change reset string todosDecor.vue
+    // text = "";
   }
 }
 
-export default getModule(TodosDecor);
+// export default getModule(TodosDecor);
