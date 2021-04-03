@@ -23,10 +23,11 @@ export default {
   },
   methods: {
     addTodo: e => {
-      console.log(`todosDecor`, e.target.value);
-
       TodosDecorStore.addTodo(e);
       e.target.value = "";
+    },
+    toggle: todo => {
+      TodosDecorStore.toggle(todo);
     }
   }
 };

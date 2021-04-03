@@ -19,8 +19,7 @@ export default class TodosMoud extends VuexModule {
 
   @Mutation
   add(text: String) {
-    console.log(`add ${text}`);
-
+    // console.log(`add ${text}`);
     this.list.push({
       text,
       done: false
