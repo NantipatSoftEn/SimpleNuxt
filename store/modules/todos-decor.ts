@@ -10,9 +10,9 @@ export type Todo = {
   text: String;
 };
 @Module({
-  name: "todos"
-  // stateFactory: true,
-  // namespaced: true
+  name: "todos",
+  stateFactory: true,
+  namespaced: true
 })
 export default class TodosMoud extends VuexModule {
   list: Array<Todo> = [];
@@ -27,14 +27,17 @@ export default class TodosMoud extends VuexModule {
     });
   }
 
-  // @Mutation
-  // toggle(todo: Todo) {
-  //   todo.done = !todo.done;
-  // }
+  @Mutation
+  toggle(todo: Todo) {
+    todo.done = !todo.done;
+  }
 
   @Action
   addTodo(e: Event) {
     let text = (<HTMLInputElement>e.target).value;
+
+    console.log(`addTodo:${text}`);
+
     this.context.commit("add", text);
     // change reset string todosDecor.vue
     // text = "";

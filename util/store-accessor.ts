@@ -24,6 +24,6 @@ export const modules = {
   todos: TodosMoudule
 };
 
-console.log("end of store-accessor: UserModule=<", typeof TodosMoudule, ">"); // expect "function"
-// @ts-ignore ("accessed before being defined")
-console.log(" and userStore=<", typeof TodosDecorStore, ">", TodosDecorStore); // expect "undefined", OK
+// console.log("end of store-accessor: TodosMudule=<", typeof TodosMoudule, ">"); // expect "function"
+// // @ts-ignore ("accessed before being defined")
+// console.log(" and Store=<", typeof TodosDecorStore, ">", TodosDecorStore); // expect "undefined", OK
