@@ -5,7 +5,10 @@ import {
   Action,
   getModule
 } from "vuex-module-decorators";
-import { fetchGirls } from "../../util/fetchGirls";
+import { json, statusAPI } from "../../util/helpFetch";
+
+const firebaseAPI: string =
+  "https://haram-nuxt-default-rtdb.firebaseio.com/girl.json";
 
 interface IGirl {
   name: string;
@@ -25,17 +28,24 @@ export default class GirlsModule extends VuexModule {
   girls: GenericObject = {};
 
   @Mutation
-  async getAllGirls() {
-    this.girls = await fetchGirls();
+  async getAllGirls(data: any) {
+    console.log(`data`, data);
+
+    this.girls = data;
   }
 
-  @Action({ commit: "getAllGirls" })
+  @Action
   fetch() {
-    console.log(`fetch s`);
+    console.log(`fetch`);
+
+    const data = fetch(firebaseAPI)
+      .then(statusAPI)
+      .then(json);
+    this.context.commit("getAllGirls", data);
   }
 
-  @Mutation
-  async MutationAllGirls() {
-    this.girls = await fetchGirls();
-  }
+  // @Mutation
+  // async MutationAllGirls() {
+  //   this.girls = await fetchGirls();
+  // }
 }

@@ -21,25 +21,20 @@
 <script>
 // import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
 import { GirlsStore } from "@/store";
+import { fetchGirls } from "../util/fetchGirls";
 export default {
-  // data() {
-  //   return {
-  //     items: []
-  //   };
-  // },
-  // async fetch() {
-  //   this.items = await fetchGirls();
-  // }
+  data() {
+    return {
+      items: []
+    };
+  },
+  async fetch() {
+    this.items = await fetchGirls();
+  },
   computed: {
     girls: () => {
-      console.log(GirlsStore.girls);
-
+      console.log(`computed`, GirlsStore.girls);
       return GirlsStore.girls;
-    }
-  },
-  mutations: {
-    fetch() {
-      GirlsStore.MutationAllGirls();
     }
   }
 };
