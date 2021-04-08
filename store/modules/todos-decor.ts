@@ -19,7 +19,7 @@ export default class TodosModule extends VuexModule {
 
   @Mutation
   add(text: String) {
-    // console.log(`add ${text}`);
+    console.log(`add ${text}`);
     this.list.push({
       text,
       done: false
@@ -33,10 +33,7 @@ export default class TodosModule extends VuexModule {
 
   @Action({ commit: "add" })
   addTodo(e: Event) {
-    let text = (<HTMLInputElement>e.target).value;
-
-    console.log(`addTodo:${text}`);
-
+    // let text = (<HTMLInputElement>e.target).value;
     // this.context.commit("add", text);
     // change reset string todosDecor.vue
     // text = "";
