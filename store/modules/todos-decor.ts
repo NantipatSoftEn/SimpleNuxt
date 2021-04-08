@@ -14,7 +14,7 @@ export type Todo = {
   stateFactory: true,
   namespaced: true
 })
-export default class TodosMoud extends VuexModule {
+export default class TodosModule extends VuexModule {
   list: Array<Todo> = [];
 
   @Mutation
@@ -31,13 +31,13 @@ export default class TodosMoud extends VuexModule {
     todo.done = !todo.done;
   }
 
-  @Action
+  @Action({ commit: "add" })
   addTodo(e: Event) {
     let text = (<HTMLInputElement>e.target).value;
 
     console.log(`addTodo:${text}`);
 
-    this.context.commit("add", text);
+    // this.context.commit("add", text);
     // change reset string todosDecor.vue
     // text = "";
   }

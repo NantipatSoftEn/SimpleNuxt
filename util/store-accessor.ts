@@ -5,23 +5,23 @@
 
 import { Store } from "vuex";
 import { getModule } from "vuex-module-decorators";
-import TodosMoudule from "@/store/modules/todos-decor";
+import TodosModule from "@/store/modules/todos-decor";
 
 // Each store is the singleton instance of its module class
 // Use these -- they have methods for state/getters/mutations/actions
 // (result from getModule(...))
-export let TodosDecorStore: TodosMoudule;
+export let TodosDecorStore: TodosModule;
 
 // initializer plugin: sets up state/getters/mutations/actions for each store
 export function initializeStores(store: Store<any>): void {
-  TodosDecorStore = getModule(TodosMoudule, store);
+  TodosDecorStore = getModule(TodosModule, store);
 }
 
 // for use in 'modules' store init (see store/index.ts), so each module
 // appears as an element of the root store's state.
 // (This is required!)
 export const modules = {
-  todos: TodosMoudule
+  todos: TodosModule
 };
 
 // console.log("end of store-accessor: TodosMudule=<", typeof TodosMoudule, ">"); // expect "function"

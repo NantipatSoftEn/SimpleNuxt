@@ -16,8 +16,6 @@ import Store, { TodosDecorStore } from "@/store";
 export default {
   computed: {
     todos: () => {
-      console.log(`TodosDecorStore.list`, TodosDecorStore.list);
-
       return TodosDecorStore.list;
     }
   },
