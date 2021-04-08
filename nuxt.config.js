@@ -26,7 +26,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
-    "@nuxtjs/google-fonts"
+    "@nuxtjs/google-fonts",
+    "@nuxt/typescript-build"
   ],
   googleFonts: {
     /* module options */
@@ -58,5 +59,14 @@ export default {
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+  extends: ["@nuxtjs/eslint-config-typescript"]
+  // typescript: {
+  //   typeCheck: {
+  //     eslint: {
+  //       files: "./**/*.{ts,js,vue}"
+  //     }
+  //   }
+  // }
+  // transpileDependencies: ["vuex-module-decorators"]
 };

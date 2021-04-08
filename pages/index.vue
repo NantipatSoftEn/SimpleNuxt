@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import firebaseAPI from "../constants/firebaseAPI";
+// import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
+import { fetchGirls } from "../util/fetchGirls";
 export default {
   data() {
     return {
@@ -27,8 +28,13 @@ export default {
     };
   },
   async fetch() {
-    this.items = await fetch(firebaseAPI).then(res => res.json());
+    this.items = await fetchGirls();
   }
-  // https://michaelnthiessen.com/loop-number-v-for/
+  // computed: {
+  //   ...mapGetters(["getAllGirls"])
+  // },
+  // methods: {
+  //   ...mapActions(["nuxtServerInit"])
+  // }
 };
 </script>
