@@ -5,7 +5,7 @@
     <p v-else-if="$fetchState.error">An error occurred :(</p>
     <div v-else>
       <b-row cols="3">
-        <b-col v-for="girl of items" :key="girl.key"
+        <b-col v-for="girl of girls" :key="girl.key"
           ><Card
             :name="girl.name"
             :facebook="girl.facebook"
@@ -20,21 +20,27 @@
 
 <script>
 // import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
-import { fetchGirls } from "../util/fetchGirls";
+import { GirlsStore } from "@/store";
 export default {
-  data() {
-    return {
-      items: []
-    };
-  },
-  async fetch() {
-    this.items = await fetchGirls();
-  }
-  // computed: {
-  //   ...mapGetters(["getAllGirls"])
+  // data() {
+  //   return {
+  //     items: []
+  //   };
   // },
-  // methods: {
-  //   ...mapActions(["nuxtServerInit"])
+  // async fetch() {
+  //   this.items = await fetchGirls();
   // }
+  computed: {
+    girls: () => {
+      console.log(GirlsStore.girls);
+
+      return GirlsStore.girls;
+    }
+  },
+  mutations: {
+    fetch() {
+      GirlsStore.MutationAllGirls();
+    }
+  }
 };
 </script>
