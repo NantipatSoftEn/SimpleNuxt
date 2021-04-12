@@ -25,17 +25,11 @@ import { fetchGirls } from "../util/fetchGirls";
 export default {
   data() {
     return {
-      items: []
+      girls: []
     };
   },
   async fetch() {
-    this.items = await fetchGirls();
-  },
-  computed: {
-    girls: () => {
-      console.log(`computed`, GirlsStore.girls);
-      return GirlsStore.girls;
-    }
+    this.girls = await fetchGirls();
   }
 };
 </script>

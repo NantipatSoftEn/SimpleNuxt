@@ -26,26 +26,4 @@ type GenericObject = { [key: string]: any };
 })
 export default class GirlsModule extends VuexModule {
   girls: GenericObject = {};
-
-  @Mutation
-  async getAllGirls(data: any) {
-    console.log(`data`, data);
-
-    this.girls = data;
-  }
-
-  @Action
-  fetch() {
-    console.log(`fetch`);
-
-    const data = fetch(firebaseAPI)
-      .then(statusAPI)
-      .then(json);
-    this.context.commit("getAllGirls", data);
-  }
-
-  // @Mutation
-  // async MutationAllGirls() {
-  //   this.girls = await fetchGirls();
-  // }
 }
