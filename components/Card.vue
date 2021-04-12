@@ -1,11 +1,6 @@
 <template>
   <div>
-    <b-card
-      :title="name"
-      :img-src="require('~/assets/img/mock1.jpg')"
-      img-alt="Image"
-      img-top
-    >
+    <b-card :title="name" :img-src="url" img-alt="Image" img-top>
       <b-card-text>
         <img src="~/assets/svg/facebook.svg" />
         <a :href="'https://www.facebook.com/' + facebook"> {{ facebook }}</a>
@@ -37,7 +32,8 @@ export default {
     facebook: String,
     instrgram: String,
     description: String,
-    age: Number
+    age: Number,
+    url: String
   }
 };
 </script>

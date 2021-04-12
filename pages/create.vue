@@ -50,6 +50,7 @@
           :state="Boolean(imageProfile)"
           placeholder="Choose a file or drop it here..."
           drop-placeholder="Drop file here..."
+          accept=".jpg, .png"
         ></b-form-file>
         <!-- <div v-for="f in form.file" :key="f.key">
           <img :src="f" class="preview" />
@@ -75,22 +76,26 @@ export default {
         facebook: "",
         instrgram: "",
         description: "",
-        age: 0
-        // file: null
+        age: 0,
+        url: ""
       },
       imageProfile: null,
       show: true
     };
   },
   methods: {
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault();
-      console.log(this.$fire.storage);
-      const s = this.$fire.storage;
       this.form.age = parseInt(this.form.age);
-      // axios.post(firebaseAPI, this.form).then(res => console.log(res));
-      alert(JSON.stringify(this.form));
+
       console.log(JSON.stringify(this.form));
+      this.form.url = await this.uploadImagesProfile(
+        this.imageProfile,
+        this.form.name
+      );
+      alert(JSON.stringify(this.form));
+
+      axios.post(firebaseAPI, this.form).then(res => console.log(res));
     },
     onReset(event) {
       event.preventDefault();
@@ -100,11 +105,41 @@ export default {
       this.form.instrgram = "";
       this.form.description = "";
       this.form.age = 0;
+      this.form.url = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
         this.show = true;
       });
+    },
+    async uploadImagesProfile(file, nameOwner) {
+      if (!file.type.match("image.*")) {
+        alert("Please upload an image.");
+        return;
+      }
+
+      const metadata = {
+        contentType: file.type
+      };
+
+      const storage = this.$fire.storage;
+      const imageRef = storage.ref(`${nameOwner}`);
+      const uploadTask = await imageRef
+        .put(file, metadata)
+        .then(snapshot => {
+          // Once the image is uploaded, obtain the download URL, which
+          // is the publicly accessible URL of the image.
+          return snapshot.ref.getDownloadURL().then(url => {
+            return url;
+          });
+        })
+        .catch(error => {
+          console.error("Error uploading image", error);
+        });
+
+      console.log(`uploadTask`, uploadTask);
+
+      return uploadTask;
     }
   }
 };

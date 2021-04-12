@@ -12,6 +12,7 @@
             :instrgram="girl.instrgram"
             :description="girl.description"
             :age="girl.age"
+            :url="girl.url"
         /></b-col>
       </b-row>
     </div>
