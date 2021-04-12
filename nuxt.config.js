@@ -52,7 +52,8 @@ export default {
           measurementId: "G-E90NY0GNXZ"
         },
         services: {
-          auth: true // Just as example. Can be any other service.
+          auth: true, // Just as example. Can be any other service.
+          storage: true
         }
       }
     ]
