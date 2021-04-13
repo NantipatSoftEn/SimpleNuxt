@@ -33,10 +33,8 @@ export default {
   },
   async fetch() {
     const obj = await fetchGirls();
-    const len = Object.keys(obj).length;
     const arr = Object.values(obj);
     while (arr.length) this.girls.push(arr.splice(0, 3));
-    console.log(this.girls);
   }
 };
 </script>
