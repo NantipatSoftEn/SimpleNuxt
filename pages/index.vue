@@ -4,17 +4,19 @@
     <p v-if="$fetchState.pending">Fetching mountains...</p>
     <p v-else-if="$fetchState.error">An error occurred :(</p>
     <div v-else>
-      <b-row cols="3">
-        <b-col v-for="girl of girls" :key="girl.key"
-          ><Card
-            :name="girl.name"
-            :facebook="girl.facebook"
-            :instrgram="girl.instrgram"
-            :description="girl.description"
-            :age="girl.age"
-            :url="girl.url"
-        /></b-col>
-      </b-row>
+      <div v-for="row of girls" :key="row.index">
+        <b-row>
+          <b-col v-for="girl of row" :key="girl.key"
+            ><Card
+              :name="girl.name"
+              :facebook="girl.facebook"
+              :instrgram="girl.instrgram"
+              :description="girl.description"
+              :age="girl.age"
+              :url="girl.url"
+          /></b-col>
+        </b-row>
+      </div>
     </div>
   </b-container>
 </template>
@@ -30,7 +32,11 @@ export default {
     };
   },
   async fetch() {
-    this.girls = await fetchGirls();
+    const obj = await fetchGirls();
+    const len = Object.keys(obj).length;
+    const arr = Object.values(obj);
+    while (arr.length) this.girls.push(arr.splice(0, 3));
+    console.log(this.girls);
   }
 };
 </script>

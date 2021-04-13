@@ -1,6 +1,13 @@
 <template>
   <div>
-    <b-card :title="name" :img-src="url" img-alt="Image" img-top>
+    <b-card
+      :title="name"
+      :img-src="url"
+      img-height="350"
+      img-width="350"
+      img-alt="Image"
+      img-top
+    >
       <b-card-text>
         <img src="~/assets/svg/facebook.svg" />
         <a :href="'https://www.facebook.com/' + facebook"> {{ facebook }}</a>
