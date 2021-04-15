@@ -6,9 +6,7 @@ import {
   getModule
 } from "vuex-module-decorators";
 import { json, statusAPI } from "../../util/helpFetch";
-
-const firebaseAPI: string =
-  "https://haram-nuxt-default-rtdb.firebaseio.com/girl.json";
+import firebaseAPI from "../../constants/firebaseAPI";
 
 interface IGirl {
   name: string;
@@ -20,10 +18,22 @@ interface IGirl {
 
 type GenericObject = { [key: string]: any };
 @Module({
-  name: "todos",
+  name: "girls",
   stateFactory: true,
   namespaced: true
 })
 export default class GirlsModule extends VuexModule {
   girls: GenericObject = {};
+
+  @Mutation
+  edit(id: string) {
+    console.log(`edit`, id);
+  }
+
+  @Action
+  editGirl(id: string) {
+    console.log(` editGirl id`, id);
+
+    this.context.commit("edit", id);
+  }
 }

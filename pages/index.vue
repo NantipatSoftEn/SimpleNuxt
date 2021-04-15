@@ -6,14 +6,15 @@
     <div v-else>
       <div v-for="row of girls" :key="row.index">
         <b-row>
-          <b-col v-for="girl of row" :key="girl.key"
-            ><Card
-              :name="girl.name"
-              :facebook="girl.facebook"
-              :instrgram="girl.instrgram"
-              :description="girl.description"
-              :age="girl.age"
-              :url="girl.url"
+          <b-col v-for="girl of row" :key="girl[0]">
+            <Card
+              :id="girl[0]"
+              :name="girl[1].name"
+              :facebook="girl[1].facebook"
+              :instrgram="girl[1].instrgram"
+              :description="girl[1].description"
+              :age="girl[1].age"
+              :url="girl[1].url"
           /></b-col>
         </b-row>
       </div>
@@ -33,8 +34,11 @@ export default {
   },
   async fetch() {
     const obj = await fetchGirls();
-    const arr = Object.values(obj);
+    const arr = Object.entries(obj);
+    //console.log(`arr`, );
+
     while (arr.length) this.girls.push(arr.splice(0, 3));
+    console.log(this.girls);
   }
 };
 </script>

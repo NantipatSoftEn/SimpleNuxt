@@ -21,7 +21,7 @@
         {{ description }}
       </b-card-text>
 
-      <b-button variant="outline-primary">แก้ไข</b-button>
+      <b-button @click="editTest(id)" variant="outline-primary">แก้ไข</b-button>
       <template #footer>
         <small class="text-muted">Last updated 3 mins ago</small>
       </template>
@@ -30,17 +30,25 @@
 </template>
 
 <script>
+import { GirlsStore } from "@/store";
 export default {
   data() {
     return {};
   },
   props: {
+    id: String,
     name: String,
     facebook: String,
     instrgram: String,
     description: String,
     age: Number,
     url: String
+  },
+  methods: {
+    editTest: id => {
+      console.log(`editTest`, id);
+      console.log(GirlsStore);
+    }
   }
 };
 </script>
