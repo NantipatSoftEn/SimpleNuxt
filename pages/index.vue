@@ -33,12 +33,11 @@ export default {
     };
   },
   async fetch() {
-    const obj = await fetchGirls();
+    const obj = await fetchGirls(`girl.json`);
     const arr = Object.entries(obj);
     //console.log(`arr`, );
 
     while (arr.length) this.girls.push(arr.splice(0, 3));
-    console.log(this.girls);
   }
 };
 </script>

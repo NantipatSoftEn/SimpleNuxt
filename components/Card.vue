@@ -44,10 +44,16 @@ export default {
     age: Number,
     url: String
   },
+  computed: {
+    test: () => {
+      console.log(`test`, GirlsStore.girls);
+      return GirlsStore.girls;
+    }
+  },
   methods: {
-    editTest: id => {
-      console.log(`editTest`, id);
-      console.log(GirlsStore);
+    async editTest(id) {
+      await GirlsStore.editGirl(id);
+      console.log(`girls`, GirlsStore.girls);
     }
   }
 };

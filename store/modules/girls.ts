@@ -5,8 +5,7 @@ import {
   Action,
   getModule
 } from "vuex-module-decorators";
-import { json, statusAPI } from "../../util/helpFetch";
-import firebaseAPI from "../../constants/firebaseAPI";
+import { fetchGirls } from "../../util/fetchGirls";
 
 interface IGirl {
   name: string;
@@ -15,25 +14,23 @@ interface IGirl {
   description: string;
   age: number;
 }
-
-type GenericObject = { [key: string]: any };
 @Module({
   name: "girls",
   stateFactory: true,
   namespaced: true
 })
 export default class GirlsModule extends VuexModule {
-  girls: GenericObject = {};
+  girls: Object = {};
 
   @Mutation
-  edit(id: string) {
-    console.log(`edit`, id);
+  async edit(obj: Object) {
+    console.log(`edit id`, obj);
+    this.girls = obj;
   }
 
   @Action
-  editGirl(id: string) {
-    console.log(` editGirl id`, id);
-
-    this.context.commit("edit", id);
+  async editGirl(id: string) {
+    const obj = await fetchGirls(`girl/${id}.json`);
+    this.context.commit("edit", obj);
   }
 }
