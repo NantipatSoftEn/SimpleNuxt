@@ -1,5 +1,6 @@
 <template>
   <div>
+    <b-alert variant="success" show>Success Alert</b-alert>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group label="Name:" description="">
         <b-form-input
@@ -98,14 +99,7 @@ export default {
     },
     onReset(event) {
       event.preventDefault();
-      // Reset our form values
-      this.form.name = "";
-      this.form.facebook = "";
-      this.form.instrgram = "";
-      this.form.description = "";
-      this.form.age = 0;
-      this.form.url = "";
-      // Trick to reset/clear native browser form validation state
+      GirlsStore.OnReset(this.form);
       this.show = false;
       this.$nextTick(() => {
         this.show = true;
@@ -118,7 +112,6 @@ export default {
         file: file,
         nameOwner: nameOwner
       };
-
       return await GirlsStore.uploadImagesProfile(detail);
     }
   }

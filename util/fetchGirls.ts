@@ -8,8 +8,8 @@ export const fetchGirls = (query: string) =>
     .then(statusAPI)
     .then(json);
 
-export const postGirl = (collection: String, data: Object) => {
+export const postGirl = (collection: String, data: Object) =>
   axios
     .post(`${firebaseAPI}/${collection}`, data)
-    .then(res => console.log(res));
-};
+    .then(statusAPI)
+    .then(res => res);

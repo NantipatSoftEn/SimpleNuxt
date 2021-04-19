@@ -10,16 +10,21 @@ import axios from "axios";
 
 interface IGirl {
   name: string;
-  facebook: string;
-  instrgram: string;
-  description: string;
+  facebook: string | null;
+  instrgram: string | null;
+  description: string | null;
   age: number;
+  url: string;
 }
-
 interface IUpload {
-  storage: Object;
+  storage: any;
   file: File;
   nameOwner: string;
+}
+
+interface IStatus {
+  status: number;
+  statusText: string;
 }
 @Module({
   name: "girls",
@@ -27,7 +32,25 @@ interface IUpload {
   namespaced: true
 })
 export default class GirlsModule extends VuexModule {
-  girls: Object = {};
+  girls: IGirl = {
+    name: "",
+    facebook: "",
+    instrgram: "",
+    description: "",
+    age: 0,
+    url: ""
+  };
+
+  statusAPI: IStatus = {
+    status: 0,
+    statusText: ""
+  };
+
+  @Mutation
+  async insert(status: IStatus) {
+    this.statusAPI = status;
+  }
+
   @Mutation
   async edit(obj: IGirl) {
     this.girls = obj;
@@ -41,13 +64,11 @@ export default class GirlsModule extends VuexModule {
 
   @Action
   async insertGirl(girl: any) {
-    postGirl(`girl.json`, girl);
+    this.context.commit("insert", await postGirl(`girl.json`, girl));
   }
 
   @Action
   async uploadImagesProfile({ storage, file, nameOwner }: IUpload) {
-    console.log(`uploadImagesProfile`, storage, file, nameOwner);
-
     if (!file.type.match("image.*")) {
       alert("Please upload an image.");
       return;
@@ -74,5 +95,16 @@ export default class GirlsModule extends VuexModule {
     console.log(`uploadTask`, uploadTask);
 
     return uploadTask;
+  }
+
+  @Action
+  OnReset(form: IGirl) {
+    form.name = "";
+    form.facebook = "";
+    form.instrgram = "";
+    form.description = "";
+    form.age = 0;
+    form.url = "";
+    return form;
   }
 }
