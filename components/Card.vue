@@ -44,16 +44,17 @@ export default {
     age: Number,
     url: String
   },
-  computed: {
-    test: () => {
-      console.log(`test`, GirlsStore.girls);
-      return GirlsStore.girls;
-    }
-  },
+  // computed: {
+  //   test: () => {
+  //     console.log(`test`, GirlsStore.girls);
+  //     return GirlsStore.girls;
+  //   }
+  // },
   methods: {
     async editTest(id) {
-      await GirlsStore.editGirl(id);
-      console.log(`girls`, GirlsStore.girls);
+      // await GirlsStore.editGirl(id);
+      // console.log(`girls`, GirlsStore.girls);
+      this.$router.push({ path: `/edit/${id}` });
     }
   }
 };

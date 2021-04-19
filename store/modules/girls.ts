@@ -24,7 +24,6 @@ export default class GirlsModule extends VuexModule {
 
   @Mutation
   async edit(obj: Object) {
-    console.log(`edit id`, obj);
     this.girls = obj;
   }
 
