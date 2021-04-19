@@ -1,6 +1,11 @@
 <template>
   <div>
-    <b-alert variant="success" show>Success Alert</b-alert>
+    <div v-if="statusAPI.status === 200">
+      <b-alert variant="success" show>create success</b-alert>
+    </div>
+    <div v-if="statusAPI.status !== 200 && statusAPI.status != 0">
+      <b-alert variant="danger" show>create fail</b-alert>
+    </div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group label="Name:" description="">
         <b-form-input
@@ -67,10 +72,7 @@
 </template>
 
 <script>
-import firebaseAPI from "../constants/firebaseAPI";
 import { GirlsStore } from "@/store";
-import { postGirls } from "@/util/fetchGirls";
-import axios from "axios";
 export default {
   data() {
     return {
@@ -85,6 +87,11 @@ export default {
       imageProfile: null,
       show: true
     };
+  },
+  computed: {
+    statusAPI: () => {
+      return GirlsStore.statusAPI;
+    }
   },
   methods: {
     async onSubmit(event) {
