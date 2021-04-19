@@ -67,9 +67,10 @@
 </template>
 
 <script>
-import axios from "axios";
-import firebaseAPI from "@/constants/firebaseAPI";
+// import axios from "axios";
+// import firebaseAPI from "@/constants/firebaseAPI";
 import { fetchGirls } from "@/util/fetchGirls";
+import { GirlsStore } from "@/store";
 export default {
   data() {
     return {
@@ -92,15 +93,13 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       this.form.age = parseInt(this.form.age);
-
-      console.log(JSON.stringify(this.form));
       this.form.url = await this.uploadImagesProfile(
         this.imageProfile,
         this.form.name
       );
       alert(JSON.stringify(this.form));
-
-      axios.post(firebaseAPI, this.form).then(res => console.log(res));
+      GirlsStore(this.form);
+      //axios.post(firebaseAPI, this.form).then(res => console.log(res));
     },
     onReset(event) {
       event.preventDefault();
@@ -118,33 +117,8 @@ export default {
       });
     },
     async uploadImagesProfile(file, nameOwner) {
-      if (!file.type.match("image.*")) {
-        alert("Please upload an image.");
-        return;
-      }
-
-      const metadata = {
-        contentType: file.type
-      };
-
       const storage = this.$fire.storage;
-      const imageRef = storage.ref(`${nameOwner}`);
-      const uploadTask = await imageRef
-        .put(file, metadata)
-        .then(snapshot => {
-          // Once the image is uploaded, obtain the download URL, which
-          // is the publicly accessible URL of the image.
-          return snapshot.ref.getDownloadURL().then(url => {
-            return url;
-          });
-        })
-        .catch(error => {
-          console.error("Error uploading image", error);
-        });
-
-      console.log(`uploadTask`, uploadTask);
-
-      return uploadTask;
+      GirlsStore.uploadImagesProfile(storage, file, nameOwner);
     }
   }
 };
