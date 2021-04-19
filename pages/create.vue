@@ -89,14 +89,12 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       this.form.age = parseInt(this.form.age);
-      // this.form.url = await this.uploadImagesProfile(
-      //   this.imageProfile,
-      //   this.form.name
-      // );
+      this.form.url = await this.uploadImagesProfile(
+        this.imageProfile,
+        this.form.name
+      );
       alert(JSON.stringify(this.form));
-      GirlsStore.insertGirl(this.form);
-      console.log(`this.form`, this.form);
-      // axios.post(firebaseAPI, this.form).then(res => console.log(res));
+      await GirlsStore.insertGirl(this.form);
     },
     onReset(event) {
       event.preventDefault();
@@ -114,8 +112,14 @@ export default {
       });
     },
     async uploadImagesProfile(file, nameOwner) {
-      const storage = this.$fire.storage;
-      GirlsStore.uploadImagesProfile(storage, file, nameOwner);
+      console.log(`create uploadImagesProfile`, file, nameOwner);
+      const detail = {
+        storage: this.$fire.storage,
+        file: file,
+        nameOwner: nameOwner
+      };
+
+      return await GirlsStore.uploadImagesProfile(detail);
     }
   }
 };

@@ -5,7 +5,7 @@ import {
   Action,
   getModule
 } from "vuex-module-decorators";
-import { fetchGirls, firebaseAPI } from "@/util/fetchGirls";
+import { fetchGirls, postGirl } from "@/util/fetchGirls";
 import axios from "axios";
 
 interface IGirl {
@@ -14,6 +14,12 @@ interface IGirl {
   instrgram: string;
   description: string;
   age: number;
+}
+
+interface IUpload {
+  storage: any;
+  file: any;
+  nameOwner: string;
 }
 @Module({
   name: "girls",
@@ -28,11 +34,6 @@ export default class GirlsModule extends VuexModule {
     this.girls = obj;
   }
 
-  @Mutation
-  async insert(girl: IGirl) {
-    axios.post(firebaseAPI, girl).then(res => console.log(res));
-  }
-
   @Action
   async editGirl(id: string) {
     const obj = await fetchGirls(`girl/${id}.json`);
@@ -41,13 +42,13 @@ export default class GirlsModule extends VuexModule {
 
   @Action
   async insertGirl(girl: any) {
-    console.log(`girl`, girl);
-
-    this.context.commit("insert", girl);
+    postGirl(`girl.json`, girl);
   }
 
   @Action
-  async uploadImagesProfile(storage: any, file: any, nameOwner: String) {
+  async uploadImagesProfile({ storage, file, nameOwner }: IUpload) {
+    console.log(`uploadImagesProfile`, storage, file, nameOwner);
+
     if (!file.type.match("image.*")) {
       alert("Please upload an image.");
       return;

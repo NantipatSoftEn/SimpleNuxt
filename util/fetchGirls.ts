@@ -7,3 +7,9 @@ export const fetchGirls = (query: string) =>
   fetch(`${firebaseAPI}/${query}`)
     .then(statusAPI)
     .then(json);
+
+export const postGirl = (collection: String, data: Object) => {
+  axios
+    .post(`${firebaseAPI}/${collection}`, data)
+    .then(res => console.log(res));
+};
