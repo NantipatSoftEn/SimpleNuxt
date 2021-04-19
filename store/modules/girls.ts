@@ -17,8 +17,8 @@ interface IGirl {
 }
 
 interface IUpload {
-  storage: any;
-  file: any;
+  storage: Object;
+  file: File;
   nameOwner: string;
 }
 @Module({
@@ -28,7 +28,6 @@ interface IUpload {
 })
 export default class GirlsModule extends VuexModule {
   girls: Object = {};
-
   @Mutation
   async edit(obj: IGirl) {
     this.girls = obj;
