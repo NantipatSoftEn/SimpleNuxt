@@ -4,37 +4,44 @@
     <p v-if="$fetchState.pending">Fetching mountains...</p>
     <p v-else-if="$fetchState.error">An error occurred :(</p>
     <div v-else>
-      <b-row cols="3">
-        <b-col v-for="girl of items" :key="girl.key"
-          ><Card
-            :name="girl.name"
-            :facebook="girl.facebook"
-            :instrgram="girl.instrgram"
-            :description="girl.description"
-            :age="girl.age"
-        /></b-col>
-      </b-row>
+      <div v-for="row of girls" :key="row.index">
+        <b-row>
+          <b-col v-for="girl of row" :key="girl[0]">
+            <Card
+              :id="girl[0]"
+              :name="girl[1].name"
+              :facebook="girl[1].facebook"
+              :instrgram="girl[1].instrgram"
+              :description="girl[1].description"
+              :age="girl[1].age"
+              :url="girl[1].url"
+          /></b-col>
+        </b-row>
+      </div>
     </div>
   </b-container>
 </template>
 
 <script>
-// import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
-import { fetchGirls } from "../util/fetchGirls";
+import { fetchGirls } from "@/util/fetchGirls";
+import { GirlsStore } from "@/store";
 export default {
   data() {
     return {
-      items: []
+      //girls: []
     };
   },
   async fetch() {
-    this.items = await fetchGirls();
+    await GirlsStore.getGirls();
+  },
+  computed: {
+    girls: () => {
+      let girlsArray = [];
+      if (!GirlsStore.girls) return; // if empty
+      const arr = Object.entries(GirlsStore.girls);
+      while (arr.length) girlsArray.push(arr.splice(0, 3));
+      return girlsArray;
+    }
   }
-  // computed: {
-  //   ...mapGetters(["getAllGirls"])
-  // },
-  // methods: {
-  //   ...mapActions(["nuxtServerInit"])
-  // }
 };
 </script>

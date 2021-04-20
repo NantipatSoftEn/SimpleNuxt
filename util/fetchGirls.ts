@@ -1,9 +1,21 @@
 import { json, statusAPI } from "./helpFetch";
+import axios from "axios";
+export const firebaseAPI: string =
+  "https://haram-nuxt-default-rtdb.firebaseio.com";
 
-const firebaseAPI: string =
-  "https://haram-nuxt-default-rtdb.firebaseio.com/girl.json";
-
-export const fetchGirls = () =>
-  fetch(firebaseAPI)
+export const fetchGirls = (id: string) =>
+  fetch(`${firebaseAPI}/${id}`)
     .then(statusAPI)
     .then(json);
+
+export const postGirl = (collection: String, data: Object) =>
+  axios
+    .post(`${firebaseAPI}/${collection}`, data)
+    .then(statusAPI)
+    .then(res => res);
+
+export const deleteGirl = (id: String) =>
+  axios
+    .delete(`${firebaseAPI}/${id}`)
+    .then(statusAPI)
+    .then(res => res);

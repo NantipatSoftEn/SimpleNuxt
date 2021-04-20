@@ -1,5 +1,24 @@
 <template>
   <div>
+    <div v-if="statusAPI.status === 200">
+      <!-- <b-alert variant="success" show>create success ☀️</b-alert> -->
+      <Alert
+        :dismissCountDown="dismissCountDown"
+        :countDownChanged="countDownChanged"
+        variant="success"
+        message="create success ☀️"
+        :dismissSecs="dismissSecs"
+      />
+    </div>
+    <div v-if="statusAPI.status !== 200 && statusAPI.status != 0">
+      <Alert
+        :dismissCountDown="dismissCountDown"
+        :countDownChanged="countDownChanged"
+        variant="danger"
+        message="create sucess"
+        :dismissSecs="dismissSecs"
+      />
+    </div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group label="Name:" description="">
         <b-form-input
@@ -44,15 +63,18 @@
           required
         ></b-form-input>
       </b-form-group>
-      <!-- <b-form-group id="input-group-2" label="Image:" label-for="input-2">
+      <b-form-group id="input-group-2" label="Image:" label-for="input-2">
         <b-form-file
-          v-model="file1"
-          :state="Boolean(file1)"
+          v-model="imageProfile"
+          :state="Boolean(imageProfile)"
           placeholder="Choose a file or drop it here..."
           drop-placeholder="Drop file here..."
+          accept=".jpg, .png"
         ></b-form-file>
-
-      </b-form-group> -->
+        <!-- <div v-for="f in form.file" :key="f.key">
+          <img :src="f" class="preview" />
+        </div> -->
+      </b-form-group>
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
@@ -63,8 +85,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import firebaseAPI from "../constants/firebaseAPI";
+import { GirlsStore } from "@/store";
 export default {
   data() {
     return {
@@ -73,32 +94,54 @@ export default {
         facebook: "",
         instrgram: "",
         description: "",
-        age: 0
+        age: 0,
+        url: ""
       },
-      show: true
+      imageProfile: null,
+      show: true,
+      dismissSecs: 7,
+      dismissCountDown: 0
     };
   },
+  computed: {
+    statusAPI: () => {
+      return GirlsStore.statusAPI;
+    }
+  },
   methods: {
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault();
       this.form.age = parseInt(this.form.age);
-      axios.post(firebaseAPI, this.form).then(res => console.log(res));
+      this.form.url = await this.uploadImageProfile(
+        this.imageProfile,
+        this.form.name
+      );
       alert(JSON.stringify(this.form));
-      console.log(JSON.stringify(this.form));
+      await GirlsStore.insertGirl(this.form);
+      this.showAlert();
     },
     onReset(event) {
       event.preventDefault();
-      // Reset our form values
-      this.form.name = "";
-      this.form.facebook = "";
-      this.form.instrgram = "";
-      this.form.description = "";
-      this.form.age = 0;
-      // Trick to reset/clear native browser form validation state
+      GirlsStore.OnReset(this.form);
       this.show = false;
       this.$nextTick(() => {
         this.show = true;
       });
+    },
+    async uploadImageProfile(file, nameOwner) {
+      const detail = {
+        storage: this.$fire.storage,
+        file: file,
+        nameOwner: nameOwner + new Date()
+      };
+      return await GirlsStore.uploadImageProfile(detail);
+    },
+
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
     }
   }
 };
