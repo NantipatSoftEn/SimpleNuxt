@@ -67,9 +67,6 @@
 </template>
 
 <script>
-// import axios from "axios";
-// import firebaseAPI from "@/constants/firebaseAPI";
-import { fetchGirls } from "@/util/fetchGirls";
 import { GirlsStore } from "@/store";
 export default {
   data() {
@@ -93,32 +90,28 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       this.form.age = parseInt(this.form.age);
-      this.form.url = await this.uploadImagesProfile(
-        this.imageProfile,
-        this.form.name
-      );
+      // this.form.url = await this.uploadImagesProfile(
+      //   this.imageProfile,
+      //   this.form.name
+      // );
       alert(JSON.stringify(this.form));
-      GirlsStore(this.form);
-      //axios.post(firebaseAPI, this.form).then(res => console.log(res));
+      //GirlsStore(this.form);
     },
     onReset(event) {
       event.preventDefault();
-      // Reset our form values
-      this.form.name = "";
-      this.form.facebook = "";
-      this.form.instrgram = "";
-      this.form.description = "";
-      this.form.age = 0;
-      this.form.url = "";
-      // Trick to reset/clear native browser form validation state
+      GirlsStore.OnReset(this.form);
       this.show = false;
       this.$nextTick(() => {
         this.show = true;
       });
     },
     async uploadImagesProfile(file, nameOwner) {
-      const storage = this.$fire.storage;
-      GirlsStore.uploadImagesProfile(storage, file, nameOwner);
+      const detail = {
+        storage: this.$fire.storage,
+        file: file,
+        nameOwner: nameOwner
+      };
+      return await GirlsStore.uploadImagesProfile(detail);
     }
   }
 };

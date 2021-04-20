@@ -1,10 +1,10 @@
 <template>
   <div>
     <div v-if="statusAPI.status === 200">
-      <b-alert variant="success" show>create success</b-alert>
+      <b-alert variant="success" show>create success ☀️</b-alert>
     </div>
     <div v-if="statusAPI.status !== 200 && statusAPI.status != 0">
-      <b-alert variant="danger" show>create fail</b-alert>
+      <b-alert variant="danger" show>create fail ☔️</b-alert>
     </div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group label="Name:" description="">
@@ -113,7 +113,6 @@ export default {
       });
     },
     async uploadImagesProfile(file, nameOwner) {
-      console.log(`create uploadImagesProfile`, file, nameOwner);
       const detail = {
         storage: this.$fire.storage,
         file: file,
