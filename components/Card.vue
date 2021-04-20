@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ statusAPI.statusText }} {{ statusAPI.status }}
+    <!-- {{ statusAPI.statusText }} {{ statusAPI.status }} -->
     <b-card
       :title="name"
       :img-src="url"
@@ -50,7 +50,6 @@
 </template>
 
 <script>
-// import { deleteGirl } from "@/util/fetchGirls";
 import { GirlsStore } from "@/store";
 export default {
   data() {
@@ -67,7 +66,7 @@ export default {
   },
   computed: {
     statusAPI: () => {
-      return GirlsStore.statusAPI;
+      setTimeout(() => {});
     }
   },
   methods: {

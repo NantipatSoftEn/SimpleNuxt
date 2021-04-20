@@ -1,10 +1,23 @@
 <template>
   <div>
     <div v-if="statusAPI.status === 200">
-      <b-alert variant="success" show>create success ☀️</b-alert>
+      <!-- <b-alert variant="success" show>create success ☀️</b-alert> -->
+      <Alert
+        :dismissCountDown="dismissCountDown"
+        :countDownChanged="countDownChanged"
+        variant="success"
+        message="create success ☀️"
+        :dismissSecs="dismissSecs"
+      />
     </div>
     <div v-if="statusAPI.status !== 200 && statusAPI.status != 0">
-      <b-alert variant="danger" show>create fail ☔️</b-alert>
+      <Alert
+        :dismissCountDown="dismissCountDown"
+        :countDownChanged="countDownChanged"
+        variant="danger"
+        message="create sucess"
+        :dismissSecs="dismissSecs"
+      />
     </div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group label="Name:" description="">
@@ -85,7 +98,9 @@ export default {
         url: ""
       },
       imageProfile: null,
-      show: true
+      show: true,
+      dismissSecs: 7,
+      dismissCountDown: 0
     };
   },
   computed: {
@@ -103,6 +118,7 @@ export default {
       );
       alert(JSON.stringify(this.form));
       await GirlsStore.insertGirl(this.form);
+      this.showAlert();
     },
     onReset(event) {
       event.preventDefault();
@@ -116,9 +132,16 @@ export default {
       const detail = {
         storage: this.$fire.storage,
         file: file,
-        nameOwner: nameOwner
+        nameOwner: nameOwner + new Date()
       };
       return await GirlsStore.uploadImageProfile(detail);
+    },
+
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
     }
   }
 };
