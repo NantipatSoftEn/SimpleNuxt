@@ -5,9 +5,7 @@ import {
   Action,
   getModule
 } from "vuex-module-decorators";
-import { fetchGirls, postGirl } from "@/util/fetchGirls";
-import axios from "axios";
-
+import { fetchGirls, postGirl, deleteGirl } from "@/util/fetchGirls";
 interface IGirl {
   name: string;
   facebook: string | null;
@@ -53,8 +51,18 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Mutation
-  async edit(obj: IGirl) {
+  edit(obj: IGirl) {
     this.girls = obj;
+  }
+
+  @Mutation
+  get(obj: IGirl) {
+    this.girls = obj;
+  }
+
+  @Mutation
+  remove(status: IStatus) {
+    this.statusAPI = status;
   }
 
   @Action
@@ -69,12 +77,14 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Action
-  deleteGirl(id: String) {}
+  async deleteGirl(id: String) {
+    this.context.commit("remove", await deleteGirl(id));
+  }
 
   @Action
-  deleteImages({ storage, url }: IUpload) {
+  async deleteImagesProfile({ storage, url }: IUpload) {
     let image = storage.refFromURL(url);
-    image
+    await image
       .delete()
       .then(() => {
         console.log(`image deleted`);
@@ -123,5 +133,16 @@ export default class GirlsModule extends VuexModule {
     form.age = 0;
     form.url = "";
     return form;
+  }
+
+  @Action
+  async getGirls() {
+    //return await fetchGirls(`girl.json`);
+    this.context.commit("get", await fetchGirls(`girl.json`));
+  }
+
+  @Action
+  resetStatusAPI() {
+    this.context.commit("resetStatus");
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ statusAPI.statusText }} {{ statusAPI.status }}
     <b-card
       :title="name"
       :img-src="url"
@@ -49,7 +50,8 @@
 </template>
 
 <script>
-import { deleteGirl } from "@/util/fetchGirls";
+// import { deleteGirl } from "@/util/fetchGirls";
+import { GirlsStore } from "@/store";
 export default {
   data() {
     return {};
@@ -63,6 +65,11 @@ export default {
     age: Number,
     url: String
   },
+  computed: {
+    statusAPI: () => {
+      return GirlsStore.statusAPI;
+    }
+  },
   methods: {
     edit(id) {
       this.$router.push({ path: `/edit/${id}` });
@@ -70,19 +77,12 @@ export default {
     showModal() {
       this.$refs["my-modal"].show();
     },
-    remove(id, url) {
-      deleteGirl(`girl/${id}.json`);
-      const storage = this.$fire.storage;
-      let image = storage.refFromURL(url);
-      image
-        .delete()
-        .then(() => {
-          console.log(`image deleted`);
-        })
-        .catch(error => {
-          console.log(`error`, error);
-        });
+    async remove(id, url = "") {
+      GirlsStore.deleteGirl(`girl/${id}.json`);
       this.$refs["my-modal"].hide();
+      if (url === "" && url === null && url === undefined) return;
+      const storage = this.$fire.storage;
+      await GirlsStore.deleteImagesProfile({ storage, url });
     }
   }
 };

@@ -24,18 +24,24 @@
 
 <script>
 import { fetchGirls } from "@/util/fetchGirls";
+import { GirlsStore } from "@/store";
 export default {
   data() {
     return {
-      girls: []
+      //girls: []
     };
   },
   async fetch() {
-    const obj = await fetchGirls(`girl.json`);
-    const arr = Object.entries(obj);
-    //console.log(`arr`, );
-
-    while (arr.length) this.girls.push(arr.splice(0, 3));
+    await GirlsStore.getGirls();
+  },
+  computed: {
+    girls: () => {
+      let girlsArray = [];
+      if (!GirlsStore.girls) return; // if empty
+      const arr = Object.entries(GirlsStore.girls);
+      while (arr.length) girlsArray.push(arr.splice(0, 3));
+      return girlsArray;
+    }
   }
 };
 </script>
