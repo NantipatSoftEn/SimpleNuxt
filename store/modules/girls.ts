@@ -20,6 +20,7 @@ interface IUpload {
   storage: any;
   file: File;
   nameOwner: string;
+  url: string;
 }
 
 interface IStatus {
@@ -68,7 +69,23 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Action
-  async uploadImagesProfile({ storage, file, nameOwner }: IUpload) {
+  deleteGirl(id: String) {}
+
+  @Action
+  deleteImages({ storage, url }: IUpload) {
+    let image = storage.refFromURL(url);
+    image
+      .delete()
+      .then(() => {
+        console.log(`image deleted`);
+      })
+      .catch((error: any) => {
+        console.log(`error`, error);
+      });
+  }
+
+  @Action
+  async uploadImageProfile({ storage, file, nameOwner }: IUpload) {
     if (!file.type.match("image.*")) {
       alert("Please upload an image.");
       return;

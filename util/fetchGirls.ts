@@ -3,13 +3,19 @@ import axios from "axios";
 export const firebaseAPI: string =
   "https://haram-nuxt-default-rtdb.firebaseio.com";
 
-export const fetchGirls = (query: string) =>
-  fetch(`${firebaseAPI}/${query}`)
+export const fetchGirls = (id: string) =>
+  fetch(`${firebaseAPI}/${id}`)
     .then(statusAPI)
     .then(json);
 
 export const postGirl = (collection: String, data: Object) =>
   axios
     .post(`${firebaseAPI}/${collection}`, data)
+    .then(statusAPI)
+    .then(res => res);
+
+export const deleteGirl = (id: String) =>
+  axios
+    .delete(`${firebaseAPI}/${id}`)
     .then(statusAPI)
     .then(res => res);

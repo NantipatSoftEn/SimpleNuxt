@@ -21,15 +21,35 @@
         {{ description }}
       </b-card-text>
 
-      <b-button @click="editTest(id)" variant="outline-primary">แก้ไข</b-button>
+      <b-button @click="edit(id)" variant="outline-primary">
+        <img src="~/assets/svg/edit.svg" />
+      </b-button>
+      <b-button @click="showModal(id)" variant="outline-danger">
+        <img src="~/assets/svg/delete.svg" />
+      </b-button>
       <template #footer>
         <small class="text-muted">Last updated 3 mins ago</small>
       </template>
     </b-card>
+
+    <b-modal ref="my-modal" hide-footer title="คุณแน่ใจแล้วว่าจะลบหรือไม่ ?">
+      <div class="d-block text-center">
+        <h3>ID: {{ id }} Name: {{ name }}</h3>
+      </div>
+      <b-button
+        class="mt-3"
+        variant="outline-danger"
+        block
+        @click="remove(id, url)"
+      >
+        แน่ใจแล้ว
+      </b-button>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import { deleteGirl } from "@/util/fetchGirls";
 export default {
   data() {
     return {};
@@ -44,8 +64,25 @@ export default {
     url: String
   },
   methods: {
-    async editTest(id) {
+    edit(id) {
       this.$router.push({ path: `/edit/${id}` });
+    },
+    showModal() {
+      this.$refs["my-modal"].show();
+    },
+    remove(id, url) {
+      deleteGirl(`girl/${id}.json`);
+      const storage = this.$fire.storage;
+      let image = storage.refFromURL(url);
+      image
+        .delete()
+        .then(() => {
+          console.log(`image deleted`);
+        })
+        .catch(error => {
+          console.log(`error`, error);
+        });
+      this.$refs["my-modal"].hide();
     }
   }
 };

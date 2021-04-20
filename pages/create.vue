@@ -97,7 +97,7 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       this.form.age = parseInt(this.form.age);
-      this.form.url = await this.uploadImagesProfile(
+      this.form.url = await this.uploadImageProfile(
         this.imageProfile,
         this.form.name
       );
@@ -112,13 +112,13 @@ export default {
         this.show = true;
       });
     },
-    async uploadImagesProfile(file, nameOwner) {
+    async uploadImageProfile(file, nameOwner) {
       const detail = {
         storage: this.$fire.storage,
         file: file,
         nameOwner: nameOwner
       };
-      return await GirlsStore.uploadImagesProfile(detail);
+      return await GirlsStore.uploadImageProfile(detail);
     }
   }
 };

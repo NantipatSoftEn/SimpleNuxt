@@ -23,8 +23,6 @@
 </template>
 
 <script>
-// import { mapGetters, mapActions, mapMutations, mapState } from "vuex";
-import { GirlsStore } from "@/store";
 import { fetchGirls } from "@/util/fetchGirls";
 export default {
   data() {
