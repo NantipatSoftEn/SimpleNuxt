@@ -6,6 +6,7 @@ import {
   getModule
 } from "vuex-module-decorators";
 import { fetchGirls, postGirl, deleteGirl } from "@/util/fetchGirls";
+import { filter } from "@/util/ObjectFilter";
 interface IGirl {
   name: string;
   facebook: string | null;
@@ -14,6 +15,10 @@ interface IGirl {
   age: number;
   url: string;
   date: String;
+}
+
+interface IGirl2 {
+  [key: string]: IGirl;
 }
 interface IUpload {
   storage: any;
@@ -32,7 +37,7 @@ interface IStatus {
   namespaced: true
 })
 export default class GirlsModule extends VuexModule {
-  girls: IGirl = {
+  girls: IGirl | IGirl2 = {
     name: "",
     facebook: "",
     instrgram: "",
@@ -63,8 +68,11 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Mutation
-  remove(status: IStatus) {
-    this.statusAPI = status;
+  remove(obj: IGirl) {
+    this.girls = filter(
+      this.girls,
+      (item: IGirl) => item.facebook !== obj.facebook
+    );
   }
 
   @Action
@@ -82,7 +90,9 @@ export default class GirlsModule extends VuexModule {
 
   @Action
   async deleteGirl(id: String) {
-    this.context.commit("remove", await deleteGirl(id));
+    let obj = await fetchGirls(id);
+    await deleteGirl(id);
+    this.context.commit("remove", obj);
   }
 
   @Action

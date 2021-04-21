@@ -3,7 +3,7 @@ import axios from "axios";
 export const firebaseAPI: string =
   "https://haram-nuxt-default-rtdb.firebaseio.com";
 
-export const fetchGirls = (id: string) =>
+export const fetchGirls = (id: String) =>
   fetch(`${firebaseAPI}/${id}`)
     .then(statusAPI)
     .then(json);
