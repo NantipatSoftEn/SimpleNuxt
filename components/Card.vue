@@ -83,6 +83,7 @@ export default {
       if (url === "" && url === null && url === undefined) return;
       const storage = this.$fire.storage;
       await GirlsStore.deleteImagesProfile({ storage, url });
+      this.$router.push({ path: `/` });
     }
   }
 };
