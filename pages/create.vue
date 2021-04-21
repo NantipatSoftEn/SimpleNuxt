@@ -5,7 +5,7 @@
       <Alert
         :dismissCountDown="dismissCountDown"
         :countDownChanged="countDownChanged"
-        variant="success"
+        type="success"
         message="create success ☀️"
         :dismissSecs="dismissSecs"
       />
@@ -14,7 +14,7 @@
       <Alert
         :dismissCountDown="dismissCountDown"
         :countDownChanged="countDownChanged"
-        variant="danger"
+        type="danger"
         message="create sucess"
         :dismissSecs="dismissSecs"
       />
@@ -95,7 +95,8 @@ export default {
         instrgram: "",
         description: "",
         age: 0,
-        url: ""
+        url: "",
+        date: ""
       },
       imageProfile: null,
       show: true,
@@ -111,6 +112,7 @@ export default {
   methods: {
     async onSubmit(event) {
       event.preventDefault();
+      this.form.date = new Date();
       this.form.age = parseInt(this.form.age);
       this.form.url = await this.uploadImageProfile(
         this.imageProfile,

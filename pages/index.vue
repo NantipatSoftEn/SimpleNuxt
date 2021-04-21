@@ -15,6 +15,7 @@
               :description="girl[1].description"
               :age="girl[1].age"
               :url="girl[1].url"
+              :date="girl[1].date"
           /></b-col>
         </b-row>
       </div>

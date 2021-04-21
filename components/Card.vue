@@ -29,7 +29,7 @@
         <img src="~/assets/svg/delete.svg" />
       </b-button>
       <template #footer>
-        <small class="text-muted">Last updated 3 mins ago</small>
+        <small class="text-muted">Last updated {{ date }}</small>
       </template>
     </b-card>
 
@@ -62,7 +62,8 @@ export default {
     instrgram: String,
     description: String,
     age: Number,
-    url: String
+    url: String,
+    date: String
   },
   computed: {
     statusAPI: () => {

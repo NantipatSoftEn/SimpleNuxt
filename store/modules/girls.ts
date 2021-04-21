@@ -13,6 +13,7 @@ interface IGirl {
   description: string | null;
   age: number;
   url: string;
+  date: String;
 }
 interface IUpload {
   storage: any;
@@ -37,7 +38,8 @@ export default class GirlsModule extends VuexModule {
     instrgram: "",
     description: "",
     age: 0,
-    url: ""
+    url: "",
+    date: ""
   };
 
   statusAPI: IStatus = {
@@ -73,6 +75,8 @@ export default class GirlsModule extends VuexModule {
 
   @Action
   async insertGirl(girl: any) {
+    console.log(`girl`, girl);
+
     this.context.commit("insert", await postGirl(`girl.json`, girl));
   }
 
