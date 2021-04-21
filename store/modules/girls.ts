@@ -7,30 +7,7 @@ import {
 } from "vuex-module-decorators";
 import { fetchGirls, postGirl, deleteGirl, editGirl } from "@/util/fetchGirls";
 import { filter } from "@/util/ObjectFilter";
-interface IGirl {
-  name: string;
-  facebook: string | null;
-  instrgram: string | null;
-  description: string | null;
-  age: number;
-  url: string;
-  date: String;
-}
-
-interface IGirl2 {
-  [key: string]: IGirl;
-}
-interface IUpload {
-  storage: any;
-  file: File;
-  nameOwner: string;
-  url: string;
-}
-
-interface IStatus {
-  status: number;
-  statusText: string;
-}
+import { IGirl, IGirl2, IStatus, IEdit, IUpload } from "@/interface/girl";
 @Module({
   name: "girls",
   stateFactory: true,
@@ -58,8 +35,8 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Mutation
-  edit(obj: IGirl) {
-    this.girls = obj;
+  edit(status: IStatus) {
+    this.statusAPI = status;
   }
 
   @Mutation
@@ -76,9 +53,9 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Action
-  async editGirl(id: string, girl: IGirl) {
-    const obj = await editGirl(`girl/${id}.json`, girl);
-    this.context.commit("edit", obj);
+  async editGirl({ id, girl }: IEdit) {
+    console.log(`edit`, id, girl);
+    //this.context.commit("edit", await editGirl(`girl/${id}.json`, girl));
   }
 
   @Action

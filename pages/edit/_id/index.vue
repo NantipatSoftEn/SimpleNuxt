@@ -128,12 +128,14 @@ export default {
       event.preventDefault();
       this.form.date = new Date();
       this.form.age = parseInt(this.form.age);
-      this.form.url = await this.uploadImageProfile(
-        this.imageProfile,
-        this.form.name
-      );
+      // this.form.url = await this.uploadImageProfile(
+      //   this.imageProfile,
+      //   this.form.name
+      // );
       alert(JSON.stringify(this.form));
-      await GirlsStore.insertGirl(this.form);
+      console.log(`this.form`, this.form);
+
+      await GirlsStore.editGirl({ id: this.$route.params.id, girl: this.form });
       this.showAlert();
     },
     onReset(event) {
