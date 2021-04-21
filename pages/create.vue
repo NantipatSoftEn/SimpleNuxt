@@ -15,7 +15,7 @@
         :dismissCountDown="dismissCountDown"
         :countDownChanged="countDownChanged"
         type="danger"
-        message="create sucess"
+        message="create fail"
         :dismissSecs="dismissSecs"
       />
     </div>
@@ -70,10 +70,11 @@
           placeholder="Choose a file or drop it here..."
           drop-placeholder="Drop file here..."
           accept=".jpg, .png"
+          @change="onFileChange"
         ></b-form-file>
-        <!-- <div v-for="f in form.file" :key="f.key">
-          <img :src="f" class="preview" />
-        </div> -->
+        <div id="preview">
+          <img v-if="preview" :src="preview" />
+        </div>
       </b-form-group>
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
@@ -99,6 +100,7 @@ export default {
         date: ""
       },
       imageProfile: null,
+      preview: null,
       show: true,
       dismissSecs: 7,
       dismissCountDown: 0
@@ -144,6 +146,10 @@ export default {
     },
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
+    },
+    onFileChange(e) {
+      const file = e.target.files[0];
+      this.preview = URL.createObjectURL(file);
     }
   }
 };

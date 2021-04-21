@@ -1,6 +1,24 @@
 <template>
   <div>
-    {{ $route.params.id }}
+    <div v-if="statusAPI.status === 200">
+      <!-- <b-alert variant="success" show>create success ☀️</b-alert> -->
+      <Alert
+        :dismissCountDown="dismissCountDown"
+        :countDownChanged="countDownChanged"
+        type="success"
+        message="edit success ☀️"
+        :dismissSecs="dismissSecs"
+      />
+    </div>
+    <div v-if="statusAPI.status !== 200 && statusAPI.status != 0">
+      <Alert
+        :dismissCountDown="dismissCountDown"
+        :countDownChanged="countDownChanged"
+        type="danger"
+        message="edit fail"
+        :dismissSecs="dismissSecs"
+      />
+    </div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group label="Name:" description="">
         <b-form-input
@@ -52,12 +70,20 @@
           placeholder="Choose a file or drop it here..."
           drop-placeholder="Drop file here..."
           accept=".jpg, .png"
+          @change="onFileChange"
         ></b-form-file>
-        <!-- <div v-for="f in form.file" :key="f.key">
-          <img :src="f" class="preview" />
-        </div> -->
       </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-form-group id="input-group-2" label="ภาพเก่า:" label-for="input-2">
+        <div id="preview">
+          <img
+            v-if="form.url"
+            :src="form.url"
+            :style="{ marginRight: `20px` }"
+          />
+          <img v-if="preview" :src="preview" />
+        </div>
+      </b-form-group>
+      <b-button type="submit" variant="primary">แก้ไข</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <b-card class="mt-3" header="Form Data Result">
@@ -78,25 +104,36 @@ export default {
         instrgram: "",
         description: "",
         age: 0,
-        url: ""
+        url: "",
+        date: ""
       },
       imageProfile: null,
-      show: true
+      preview: null,
+      show: true,
+      dismissSecs: 7,
+      dismissCountDown: 0
     };
   },
   async fetch() {
     this.form = await fetchGirls(`girl/${this.$route.params.id}.json`);
   },
+  computed: {
+    statusAPI: () => {
+      return GirlsStore.statusAPI;
+    }
+  },
   methods: {
     async onSubmit(event) {
       event.preventDefault();
+      this.form.date = new Date();
       this.form.age = parseInt(this.form.age);
-      // this.form.url = await this.uploadImagesProfile(
-      //   this.imageProfile,
-      //   this.form.name
-      // );
+      this.form.url = await this.uploadImageProfile(
+        this.imageProfile,
+        this.form.name
+      );
       alert(JSON.stringify(this.form));
-      //GirlsStore(this.form);
+      await GirlsStore.insertGirl(this.form);
+      this.showAlert();
     },
     onReset(event) {
       event.preventDefault();
@@ -110,9 +147,20 @@ export default {
       const detail = {
         storage: this.$fire.storage,
         file: file,
-        nameOwner: nameOwner
+        nameOwner: nameOwner + new Date()
       };
       return await GirlsStore.uploadImageProfile(detail);
+    },
+
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
+    },
+    onFileChange(e) {
+      const file = e.target.files[0];
+      this.preview = URL.createObjectURL(file);
     }
   }
 };

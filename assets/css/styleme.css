@@ -1,0 +1,10 @@
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 50%;
+  max-height: 50%;
+}
