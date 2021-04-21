@@ -19,6 +19,7 @@
         :dismissSecs="dismissSecs"
       />
     </div>
+    คุณกำลังแก้ไข {{ $route.params.id }}
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group label="Name:" description="">
         <b-form-input

@@ -19,3 +19,9 @@ export const deleteGirl = (id: String) =>
     .delete(`${firebaseAPI}/${id}`)
     .then(statusAPI)
     .then(res => res);
+
+export const editGirl = (id: String, data: Object) =>
+  axios
+    .put(`${firebaseAPI}/${id}`, data)
+    .then(statusAPI)
+    .then(res => res);

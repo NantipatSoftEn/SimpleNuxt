@@ -5,7 +5,7 @@ import {
   Action,
   getModule
 } from "vuex-module-decorators";
-import { fetchGirls, postGirl, deleteGirl } from "@/util/fetchGirls";
+import { fetchGirls, postGirl, deleteGirl, editGirl } from "@/util/fetchGirls";
 import { filter } from "@/util/ObjectFilter";
 interface IGirl {
   name: string;
@@ -76,13 +76,13 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Action
-  async editGirl(id: string) {
-    const obj = await fetchGirls(`girl/${id}.json`);
+  async editGirl(id: string, girl: IGirl) {
+    const obj = await editGirl(`girl/${id}.json`, girl);
     this.context.commit("edit", obj);
   }
 
   @Action
-  async insertGirl(girl: any) {
+  async insertGirl(girl: IGirl) {
     console.log(`girl`, girl);
 
     this.context.commit("insert", await postGirl(`girl.json`, girl));

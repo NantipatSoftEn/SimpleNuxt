@@ -33,8 +33,13 @@
       </template>
     </b-card>
 
-    <b-modal ref="my-modal" hide-footer title="คุณแน่ใจแล้วว่าจะลบหรือไม่ ?">
-      <div class="d-block text-center">
+    <b-modal
+      class="font-display"
+      ref="my-modal"
+      hide-footer
+      title="คุณแน่ใจแล้วว่าจะลบหรือไม่ ?"
+    >
+      <div class="d-block text-center font-display">
         <h3>ID: {{ id }} Name: {{ name }}</h3>
       </div>
       <b-button
