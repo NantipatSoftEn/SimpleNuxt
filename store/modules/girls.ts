@@ -1,13 +1,15 @@
 import {
-  Module,
-  VuexModule,
-  Mutation,
   Action,
+  Module,
+  Mutation,
+  VuexModule,
   getModule
 } from "vuex-module-decorators";
-import { fetchGirls, postGirl, deleteGirl, editGirl } from "@/util/fetchGirls";
+import { IEdit, IGirl, IGirl2, IStatus, IUpload } from "@/interface/girl";
+import { deleteGirl, editGirl, fetchGirls, postGirl } from "@/util/fetchGirls";
+
 import { filter } from "@/util/ObjectFilter";
-import { IGirl, IGirl2, IStatus, IEdit, IUpload } from "@/interface/girl";
+
 @Module({
   name: "girls",
   stateFactory: true,
@@ -36,8 +38,6 @@ export default class GirlsModule extends VuexModule {
 
   @Mutation
   edit(status: IStatus) {
-    console.log(`status`, status);
-
     this.statusAPI = status;
   }
 
@@ -56,7 +56,6 @@ export default class GirlsModule extends VuexModule {
 
   @Action
   async editGirl({ id, girl }: IEdit) {
-    console.log(`edit`, id, girl);
     this.context.commit("edit", await editGirl(`girl/${id}.json`, girl));
   }
 

@@ -131,6 +131,15 @@ export default {
       console.log(`this.form.url`, this.form.url);
 
       if (this.imageProfile !== null) {
+        if (
+          this.form.url !== "" &&
+          this.form.url !== null &&
+          this.form.url !== undefined
+        ) {
+          const storage = this.$fire.storage;
+          await GirlsStore.deleteImagesProfile({ storage, url: this.form.url });
+        }
+
         this.form.url = await this.uploadImageProfile(
           this.imageProfile,
           this.form.name
@@ -138,7 +147,7 @@ export default {
       }
 
       alert(JSON.stringify(this.form));
-      console.log(`this.form`, this.form);
+      // console.log(`this.form`, this.form);
 
       await GirlsStore.editGirl({ id: this.$route.params.id, girl: this.form });
       this.showAlert();
