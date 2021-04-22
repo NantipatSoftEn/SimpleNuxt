@@ -6,11 +6,15 @@ interface IUser {
 
 export const mutations = {
   ON_AUTH_STATE_CHANGED_MUTATION: (state: IUser, { authUser, claims }: any) => {
-    const { uid, email, emailVerified } = authUser;
-    state.email = email;
-    state.uid = uid;
-    state.emailVerified = emailVerified;
-    console.log(`ON_AUTH_STATE_CHANGED_MUTATION`, authUser, claims);
+    console.log(`authUser`, authUser, `claims`, claims);
+    if (authUser) {
+      const { uid, email, emailVerified } = authUser;
+      state.email = email;
+      state.uid = uid;
+      state.emailVerified = emailVerified;
+    }
+
+    console.log(`authUser`, authUser, `claims`, claims);
   }
 };
 

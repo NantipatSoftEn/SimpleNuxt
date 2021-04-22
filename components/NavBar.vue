@@ -38,8 +38,8 @@
               </em>
             </template>
             <!-- <b-dropdown-item href="#">Profile</b-dropdown-item> -->
-            <b-dropdown-item href="#"
-              ><div :style="{ color: `red` }">
+            <b-dropdown-item @click="logout()">
+              <div :style="{ color: `red` }">
                 <img src="~/assets/svg/logout.svg" /> Sign Out
               </div>
             </b-dropdown-item>
@@ -54,6 +54,21 @@
 export default {
   props: {
     email: String
+  },
+  methods: {
+    async logout() {
+      console.log(`logout`);
+
+      const auth = this.$fire.auth;
+      await auth
+        .signOut()
+        .then(() => {
+          alert("✈️ Sign-out successful.");
+        })
+        .catch(error => {
+          alert("🚀 error", error);
+        });
+    }
   }
 };
 </script>
