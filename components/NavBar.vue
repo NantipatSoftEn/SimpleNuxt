@@ -33,11 +33,15 @@
           <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template #button-content>
-              <em :style="{ color: `#3366ff` }"> {{ email }}</em>
+              <em :style="{ color: `#3366ff` }">
+                <img src="~/assets/svg/man.svg" /> {{ email }}
+              </em>
             </template>
             <!-- <b-dropdown-item href="#">Profile</b-dropdown-item> -->
             <b-dropdown-item href="#"
-              ><div :style="{ color: `red` }">Sign Out</div>
+              ><div :style="{ color: `red` }">
+                <img src="~/assets/svg/logout.svg" /> Sign Out
+              </div>
             </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>

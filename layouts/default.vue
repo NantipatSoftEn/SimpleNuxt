@@ -1,6 +1,5 @@
 <template>
   <div class="container font-display">
-    =
     <NavBar :email="email" />
     <Nuxt />
   </div>
