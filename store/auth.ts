@@ -1,11 +1,11 @@
-interface User {
+interface IUser {
   uid: String;
   email: String;
   emailVerified: Boolean;
 }
 
 export const mutations = {
-  ON_AUTH_STATE_CHANGED_MUTATION: (state: User, { authUser, claims }: any) => {
+  ON_AUTH_STATE_CHANGED_MUTATION: (state: IUser, { authUser, claims }: any) => {
     const { uid, email, emailVerified } = authUser;
     state.email = email;
     state.uid = uid;
@@ -14,7 +14,9 @@ export const mutations = {
   }
 };
 
-export const getters = {};
+export const getters = {
+  email: (state: IUser) => state.email
+};
 
 export const actions = {
   onAuthStateChangedAction: (context: any, { authUser, claims }: any) => {

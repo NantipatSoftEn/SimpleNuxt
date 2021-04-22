@@ -1,15 +1,17 @@
 <template>
   <div class="container font-display">
-    <NavBar />
+    =
+    <NavBar :email="email" />
     <Nuxt />
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   computed: {
-    statusAPI: () => {
-      setTimeout(() => {});
-    }
+    ...mapGetters(`auth`, {
+      email: `email`
+    })
   }
 };
 </script>
