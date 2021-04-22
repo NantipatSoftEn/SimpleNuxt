@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- {{ statusAPI.statusText }} {{ statusAPI.status }} -->
     <b-card
       :title="name"
       :img-src="url"
@@ -69,11 +68,6 @@ export default {
     age: Number,
     url: String,
     date: String
-  },
-  computed: {
-    statusAPI: () => {
-      setTimeout(() => {});
-    }
   },
   methods: {
     edit(id) {

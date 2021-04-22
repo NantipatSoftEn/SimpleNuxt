@@ -24,13 +24,10 @@
 </template>
 
 <script>
-import { fetchGirls } from "@/util/fetchGirls";
 import { GirlsStore } from "@/store";
 export default {
   data() {
-    return {
-      //girls: []
-    };
+    return {};
   },
   async fetch() {
     await GirlsStore.getGirls();

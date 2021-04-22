@@ -12,9 +12,9 @@
         label="Username:"
         description="แสงสว่างธรรมชาติเกิดจากตัวอาทิตย์ แสงสว่างของชีวิตเกิดจากการปล่อยวาง"
       >
-        <b-form-input
+        <!-- <b-form-input
           v-model="form.email"
-          type="text"
+          type="email"
           placeholder="Enter email"
           required
         ></b-form-input>
@@ -30,7 +30,8 @@
           type="password"
           placeholder="Enter password"
           required
-        ></b-form-input>
+          autocomplete="on"
+        ></b-form-input> -->
       </b-form-group>
 
       <b-button type="submit" variant="primary">Login</b-button>
@@ -45,7 +46,7 @@ export default {
   data() {
     return {
       form: {
-        username: "",
+        email: "",
         password: ""
       },
 
@@ -53,8 +54,18 @@ export default {
     };
   },
   methods: {
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault();
+      const auth = this.$fire.auth;
+      await auth
+        .signInWithEmailAndPassword("inw@gmail.com", "1234567")
+        .then(user => {
+          console.log(`user`, user);
+          this.$router.push({ path: `/` });
+        })
+        .catch(error => {
+          console.log(`error`, error);
+        });
       alert(JSON.stringify(this.form));
     },
     onReset(event) {
