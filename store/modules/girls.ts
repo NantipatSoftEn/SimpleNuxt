@@ -36,6 +36,8 @@ export default class GirlsModule extends VuexModule {
 
   @Mutation
   edit(status: IStatus) {
+    console.log(`status`, status);
+
     this.statusAPI = status;
   }
 
@@ -55,7 +57,7 @@ export default class GirlsModule extends VuexModule {
   @Action
   async editGirl({ id, girl }: IEdit) {
     console.log(`edit`, id, girl);
-    //this.context.commit("edit", await editGirl(`girl/${id}.json`, girl));
+    this.context.commit("edit", await editGirl(`girl/${id}.json`, girl));
   }
 
   @Action
