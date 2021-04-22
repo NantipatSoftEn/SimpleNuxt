@@ -52,7 +52,17 @@ export default {
           measurementId: "G-E90NY0GNXZ"
         },
         services: {
-          auth: true, // Just as example. Can be any other service.
+          auth: {
+            persistence: "local", // default
+            initialize: {
+              onAuthStateChangedMutation: "ON_AUTH_STATE_CHANGED_MUTATION",
+              onAuthStateChangedAction: "onAuthStateChangedAction",
+              subscribeManually: false
+            },
+            ssr: false, // default
+            emulatorPort: 9099,
+            emulatorHost: "http://localhost"
+          },
           storage: true
         }
       }

@@ -1,8 +1,11 @@
 <template>
-  <div class="container font-display">
-    <div>My blog navigation bar here</div>
-    <Nuxt />
-  </div>
+  <b-container class="font-display">
+    <b-row class="justify-content-md-center">
+      <b-col cols="1"></b-col>
+      <b-col cols="8"> <Nuxt /></b-col>
+      <b-col cols="1"></b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <style>
