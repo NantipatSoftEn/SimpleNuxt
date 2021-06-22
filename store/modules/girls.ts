@@ -67,7 +67,7 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Action
-  async deleteGirl(id: String) {
+  async deleteGirl(id: string) {
     let obj = await fetchGirls(id);
     await deleteGirl(id);
     this.context.commit("remove", obj);
@@ -103,7 +103,7 @@ export default class GirlsModule extends VuexModule {
       .then((snapshot: any) => {
         // Once the image is uploaded, obtain the download URL, which
         // is the publicly accessible URL of the image.
-        return snapshot.ref.getDownloadURL().then((url: String) => {
+        return snapshot.ref.getDownloadURL().then((url: string) => {
           return url;
         });
       })

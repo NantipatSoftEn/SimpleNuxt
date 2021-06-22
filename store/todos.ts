@@ -8,12 +8,12 @@ export const state = () => ({
 
 export type State = typeof state;
 export type Todo = {
-  done: Boolean;
-  text: String;
+  done: boolean;
+  text: string;
 };
 
 export const mutations = {
-  add(state: { list: Array<Todo> }, text: String) {
+  add(state: { list: Array<Todo> }, text: string) {
     state.list.push({
       text,
       done: false

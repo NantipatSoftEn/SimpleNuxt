@@ -1,6 +1,6 @@
 interface IUser {
-  uid: String;
-  email: String;
+  uid: string;
+  email: string;
   emailVerified: Boolean;
 }
 
