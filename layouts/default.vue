@@ -1,5 +1,5 @@
 <template>
-  <div class="container font-display">
+  <div class="container font-body">
     <NavBar :email="email" />
     <Nuxt />
   </div>
@@ -15,7 +15,7 @@ export default {
 };
 </script>
 <style>
-.font-display {
+.font-body {
   font-family: "Pangolin", "Niramit", cursive;
 }
 </style>

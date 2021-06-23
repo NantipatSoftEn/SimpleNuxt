@@ -35,7 +35,7 @@
                   class="custom-control-input"
                 />
                 <label for="customCheck1" class="custom-control-label"
-                  >Look Password</label
+                  >Remember password</label
                 >
               </div>
               <button

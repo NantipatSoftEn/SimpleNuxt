@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style>
-.font-display {
+.font-body {
   font-family: "Pangolin", "Niramit", cursive;
 }
 </style>

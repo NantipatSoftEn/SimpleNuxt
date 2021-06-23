@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid font-body">
     <div class="row no-gutter">
       <!-- The image half -->
       <div class="col-md-6 d-none d-md-flex bg-image"></div>
@@ -10,7 +10,7 @@
 </template>
 
 <style>
-.font-display {
+.font-body {
   font-family: "Pangolin", "Niramit", cursive;
 }
 .bg-image {
