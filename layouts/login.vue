@@ -1,15 +1,21 @@
 <template>
-  <b-container class="font-display">
-    <b-row class="justify-content-md-center">
-      <b-col cols="1"></b-col>
-      <b-col cols="8"> <Nuxt /></b-col>
-      <b-col cols="1"></b-col>
-    </b-row>
-  </b-container>
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <!-- The image half -->
+      <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+      <Nuxt />
+    </div>
+  </div>
 </template>
 
 <style>
 .font-display {
   font-family: "Pangolin", "Niramit", cursive;
+}
+.bg-image {
+  background-image: url("../assets/img/ammriss.jpg");
+  background-size: cover;
+  background-position: center center;
 }
 </style>

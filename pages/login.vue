@@ -1,42 +1,66 @@
 <template>
-  <div>
-    <img
-      src="~/assets/img/ammriss.jpg"
-      height="400"
-      width="300"
-      class="rounded mx-auto d-block"
-    />
-    <h3>Login page</h3>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        label="Username:"
-        description="แสงสว่างธรรมชาติเกิดจากตัวอาทิตย์ แสงสว่างของชีวิตเกิดจากการปล่อยวาง"
-      >
-        <!-- <b-form-input
-          v-model="form.email"
-          type="email"
-          placeholder="Enter email"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group
-        id="input-group-2"
-        label="Password:"
-        description="อย่าปล่อยให้ชีวิตของเราอยู่กับที่หรือถอยหลัง จงเดินหน้าและพัฒนาต่อไป"
-      >
-        <b-form-input
-          v-model="form.password"
-          type="password"
-          placeholder="Enter password"
-          required
-          autocomplete="on"
-        ></b-form-input> -->
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Login</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
+  <div class="col-md-6 bg-light">
+    <div class="login d-flex align-items-center py-5">
+      <!-- Demo content-->
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-xl-7 mx-auto">
+            <h3 class="display-4">Split page!</h3>
+            <p class="text-muted mb-4">
+              Create a login split page using Bootstrap 4.
+            </p>
+            <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+              <div class="form-group mb-3">
+                <input
+                  id="inputEmail"
+                  type="email"
+                  placeholder="Email address"
+                  autofocus=""
+                  class="form-control rounded-pill border-0 shadow-sm px-4"
+                />
+              </div>
+              <div class="form-group mb-3">
+                <input
+                  id="inputPassword"
+                  type="password"
+                  placeholder="Password"
+                  class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                />
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input
+                  id="customCheck1"
+                  type="checkbox"
+                  checked
+                  class="custom-control-input"
+                />
+                <label for="customCheck1" class="custom-control-label"
+                  >Look Password</label
+                >
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+              >
+                Sign in
+              </button>
+              <div class="text-center d-flex justify-content-between mt-4">
+                <p>
+                  Snippet by
+                  <a
+                    href="https://bootstrapious.com/snippets"
+                    class="font-italic text-muted"
+                  >
+                    <u>Boostrapious</u></a
+                  >
+                </p>
+              </div>
+            </b-form>
+          </div>
+        </div>
+      </div>
+      <!-- End -->
+    </div>
   </div>
 </template>
 
@@ -81,3 +105,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+.login,
+.image {
+  min-height: 100vh;
+}
+</style>
