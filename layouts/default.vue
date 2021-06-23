@@ -7,6 +7,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  middleware: "authenticated",
   computed: {
     ...mapGetters(`auth`, {
       email: `email`

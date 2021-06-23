@@ -64,6 +64,7 @@ export default {
         .signOut()
         .then(() => {
           alert("✈️ Sign-out successful.");
+          this.$router.push({ path: `/login` });
         })
         .catch(error => {
           alert("🚀 error", error);

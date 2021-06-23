@@ -1,7 +1,8 @@
 interface IUser {
   uid: string;
   email: string;
-  emailVerified: Boolean;
+  emailVerified: boolean;
+  authenticated: boolean;
 }
 
 export const mutations = {
@@ -12,6 +13,9 @@ export const mutations = {
       state.email = email;
       state.uid = uid;
       state.emailVerified = emailVerified;
+      state.authenticated = true;
+    } else {
+      state.authenticated = false;
     }
 
     console.log(`authUser`, authUser, `claims`, claims);
@@ -33,6 +37,3 @@ export const actions = {
     }
   }
 };
-
-// keymasterviriya1150@gmail.com
-// 0876146053***
