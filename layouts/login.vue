@@ -18,4 +18,7 @@
   background-size: cover;
   background-position: center center;
 }
+.form-control {
+  font-weight: 600;
+}
 </style>

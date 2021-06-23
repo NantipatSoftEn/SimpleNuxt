@@ -5,10 +5,20 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-10 col-xl-7 mx-auto">
-            <h3 class="display-4">Split page!</h3>
-            <p class="text-muted mb-4">
-              Create a login split page using Bootstrap 4.
-            </p>
+            <h3 class="display-4">
+              Sing In
+              <img
+                src="https://nuxtjs.org/logos/nuxtjs-typo.svg"
+                width="100"
+                height="100"
+              />
+              <img
+                src="https://firebase.google.com/downloads/brand-guidelines/SVG/logo-standard.svg"
+                width="100"
+                height="100"
+              />
+            </h3>
+
             <b-form @submit="onSubmit" @reset="onReset" v-if="show">
               <div class="form-group mb-3">
                 <input
@@ -35,7 +45,7 @@
                   class="custom-control-input"
                 />
                 <label for="customCheck1" class="custom-control-label"
-                  >Remember password</label
+                  >Look password</label
                 >
               </div>
               <button
@@ -46,13 +56,9 @@
               </button>
               <div class="text-center d-flex justify-content-between mt-4">
                 <p>
-                  Snippet by
-                  <a
-                    href="https://bootstrapious.com/snippets"
-                    class="font-italic text-muted"
-                  >
-                    <u>Boostrapious</u></a
-                  >
+                  <img src="~/assets/svg/redis.svg" />
+
+                  <img src="~/assets/svg/docker.svg" />
                 </p>
               </div>
             </b-form>
@@ -105,9 +111,12 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style>
 .login,
 .image {
   min-height: 100vh;
+}
+.form-control {
+  font-weight: 600;
 }
 </style>
