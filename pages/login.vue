@@ -50,7 +50,7 @@
               </div>
               <button
                 type="submit"
-                class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                class="btn btn-primary btn-block text-uppercase mb-3 rounded-pill shadow-sm"
               >
                 Sign in
               </button>

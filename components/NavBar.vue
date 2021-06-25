@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark" id="distance">
+    <b-navbar toggleable="lg" class="nav-custom">
       <b-navbar-brand href="/">Product</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -75,7 +75,9 @@ export default {
 </script>
 
 <style>
-#distance {
+.nav-custom {
+  background-color: #ebf5fb;
   margin-bottom: 20px;
+  border-radius: 8px;
 }
 </style>
