@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- {{ statusAPI.statusText }} {{ statusAPI.status }} -->
     <b-card
       :title="name"
       :img-src="url"
@@ -29,12 +28,17 @@
         <img src="~/assets/svg/delete.svg" />
       </b-button>
       <template #footer>
-        <small class="text-muted">Last updated 3 mins ago</small>
+        <small class="text-muted">Last updated {{ date }}</small>
       </template>
     </b-card>
 
-    <b-modal ref="my-modal" hide-footer title="คุณแน่ใจแล้วว่าจะลบหรือไม่ ?">
-      <div class="d-block text-center">
+    <b-modal
+      class="font-body"
+      ref="my-modal"
+      hide-footer
+      title="คุณแน่ใจแล้วว่าจะลบหรือไม่ ?"
+    >
+      <div class="d-block text-center font-body">
         <h3>ID: {{ id }} Name: {{ name }}</h3>
       </div>
       <b-button
@@ -62,12 +66,8 @@ export default {
     instrgram: String,
     description: String,
     age: Number,
-    url: String
-  },
-  computed: {
-    statusAPI: () => {
-      setTimeout(() => {});
-    }
+    url: String,
+    date: String
   },
   methods: {
     edit(id) {
@@ -82,6 +82,7 @@ export default {
       if (url === "" && url === null && url === undefined) return;
       const storage = this.$fire.storage;
       await GirlsStore.deleteImagesProfile({ storage, url });
+      this.$router.push({ path: `/` });
     }
   }
 };

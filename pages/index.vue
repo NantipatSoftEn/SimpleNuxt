@@ -1,6 +1,5 @@
 <template>
   <b-container class="bv-example-row" fluid="md">
-    <!-- {{ $fetchState }} -->
     <p v-if="$fetchState.pending">Fetching mountains...</p>
     <p v-else-if="$fetchState.error">An error occurred :(</p>
     <div v-else>
@@ -15,6 +14,7 @@
               :description="girl[1].description"
               :age="girl[1].age"
               :url="girl[1].url"
+              :date="girl[1].date"
           /></b-col>
         </b-row>
       </div>
@@ -23,13 +23,11 @@
 </template>
 
 <script>
-import { fetchGirls } from "@/util/fetchGirls";
 import { GirlsStore } from "@/store";
+import { mapGetters } from "vuex";
 export default {
   data() {
-    return {
-      //girls: []
-    };
+    return {};
   },
   async fetch() {
     await GirlsStore.getGirls();

@@ -1,11 +1,22 @@
 <template>
-  <div class="container font-display">
-    <NavBar />
+  <div class="container font-body">
+    <NavBar :email="email" />
     <Nuxt />
   </div>
 </template>
+<script>
+import { mapGetters } from "vuex";
+export default {
+  middleware: "authenticated",
+  computed: {
+    ...mapGetters(`auth`, {
+      email: `email`
+    })
+  }
+};
+</script>
 <style>
-.font-display {
+.font-body {
   font-family: "Pangolin", "Niramit", cursive;
 }
 </style>

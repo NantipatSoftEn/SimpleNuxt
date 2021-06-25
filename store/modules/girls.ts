@@ -1,43 +1,29 @@
 import {
-  Module,
-  VuexModule,
-  Mutation,
   Action,
+  Module,
+  Mutation,
+  VuexModule,
   getModule
 } from "vuex-module-decorators";
-import { fetchGirls, postGirl, deleteGirl } from "@/util/fetchGirls";
-interface IGirl {
-  name: string;
-  facebook: string | null;
-  instrgram: string | null;
-  description: string | null;
-  age: number;
-  url: string;
-}
-interface IUpload {
-  storage: any;
-  file: File;
-  nameOwner: string;
-  url: string;
-}
+import { IEdit, IGirl, IGirl2, IStatus, IUpload } from "@/interface/girl";
+import { deleteGirl, editGirl, fetchGirls, postGirl } from "@/util/fetchGirls";
 
-interface IStatus {
-  status: number;
-  statusText: string;
-}
+import { filter } from "@/util/ObjectFilter";
+
 @Module({
   name: "girls",
   stateFactory: true,
   namespaced: true
 })
 export default class GirlsModule extends VuexModule {
-  girls: IGirl = {
+  girls: IGirl | IGirl2 = {
     name: "",
     facebook: "",
     instrgram: "",
     description: "",
     age: 0,
-    url: ""
+    url: "",
+    date: ""
   };
 
   statusAPI: IStatus = {
@@ -51,8 +37,8 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Mutation
-  edit(obj: IGirl) {
-    this.girls = obj;
+  edit(status: IStatus) {
+    this.statusAPI = status;
   }
 
   @Mutation
@@ -61,24 +47,30 @@ export default class GirlsModule extends VuexModule {
   }
 
   @Mutation
-  remove(status: IStatus) {
-    this.statusAPI = status;
+  remove(obj: IGirl) {
+    this.girls = filter(
+      this.girls,
+      (item: IGirl) => item.facebook !== obj.facebook
+    );
   }
 
   @Action
-  async editGirl(id: string) {
-    const obj = await fetchGirls(`girl/${id}.json`);
-    this.context.commit("edit", obj);
+  async editGirl({ id, girl }: IEdit) {
+    this.context.commit("edit", await editGirl(`girl/${id}.json`, girl));
   }
 
   @Action
-  async insertGirl(girl: any) {
+  async insertGirl(girl: IGirl) {
+    console.log(`girl`, girl);
+
     this.context.commit("insert", await postGirl(`girl.json`, girl));
   }
 
   @Action
-  async deleteGirl(id: String) {
-    this.context.commit("remove", await deleteGirl(id));
+  async deleteGirl(id: string) {
+    let obj = await fetchGirls(id);
+    await deleteGirl(id);
+    this.context.commit("remove", obj);
   }
 
   @Action
@@ -111,7 +103,7 @@ export default class GirlsModule extends VuexModule {
       .then((snapshot: any) => {
         // Once the image is uploaded, obtain the download URL, which
         // is the publicly accessible URL of the image.
-        return snapshot.ref.getDownloadURL().then((url: String) => {
+        return snapshot.ref.getDownloadURL().then((url: string) => {
           return url;
         });
       })

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark" id="distance">
+    <b-navbar toggleable="lg" class="nav-custom">
       <b-navbar-brand href="/">Product</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -33,18 +33,51 @@
           <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template #button-content>
-              <em>User</em>
+              <em :style="{ color: `#3366ff` }">
+                <img src="~/assets/svg/man.svg" /> {{ email }}
+              </em>
             </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <!-- <b-dropdown-item href="#">Profile</b-dropdown-item> -->
+            <b-dropdown-item @click="logout()">
+              <div :style="{ color: `red` }">
+                <img src="~/assets/svg/logout.svg" /> Sign Out
+              </div>
+            </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    email: String
+  },
+  methods: {
+    async logout() {
+      console.log(`logout`);
+
+      const auth = this.$fire.auth;
+      await auth
+        .signOut()
+        .then(() => {
+          alert("✈️ Sign-out successful.");
+          this.$router.push({ path: `/login` });
+        })
+        .catch(error => {
+          alert("🚀 error", error);
+        });
+    }
+  }
+};
+</script>
+
 <style>
-#distance {
+.nav-custom {
+  background-color: #ebf5fb;
   margin-bottom: 20px;
+  border-radius: 8px;
 }
 </style>

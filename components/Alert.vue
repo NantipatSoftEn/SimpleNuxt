@@ -1,9 +1,10 @@
 <template>
   <div>
+    {{ type }}
     <b-alert
       :show="dismissCountDown"
       dismissible
-      variant="variant"
+      :variant="type"
       @dismissed="dismissCountDown = 0"
       @dismiss-count-down="countDownChanged"
     >
@@ -12,7 +13,7 @@
         {{ dismissCountDown }} seconds...
       </p>
       <b-progress
-        variant="warning"
+        :variant="type"
         :max="dismissSecs"
         :value="dismissCountDown"
         height="4px"
@@ -28,7 +29,7 @@ export default {
     dismissSecs: Number,
     message: String,
     countDownChanged: Function,
-    variant: String
+    type: String
   }
 };
 </script>

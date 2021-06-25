@@ -3,10 +3,10 @@
 // In here you import all your modules, call getModule on them to turn them
 // into the actual stores, and then re-export them.
 
-import { Store } from "vuex";
-import { getModule } from "vuex-module-decorators";
-import TodosModule from "@/store/modules/todos-decor";
 import GirlsModule from "@/store/modules/girls";
+import { Store } from "vuex";
+import TodosModule from "@/store/modules/todos-decor";
+import { getModule } from "vuex-module-decorators";
 
 // Each store is the singleton instance of its module class
 // Use these -- they have methods for state/getters/mutations/actions

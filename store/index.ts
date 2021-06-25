@@ -1,6 +1,8 @@
-import Vue from "vue";
 import Vuex, { Store } from "vuex";
-import { initializeStores, modules } from "@/util/store-accessor";
+import { initializeStores, modules } from "@/store/store-accessor";
+
+import Vue from "vue";
+
 Vue.use(Vuex);
 
 // export const Store = new Vuex.Store({
@@ -11,7 +13,7 @@ Vue.use(Vuex);
 
 const initializer = (store: Store<any>) => initializeStores(store);
 export const plugins = [initializer];
-export * from "@/util/store-accessor"; // re-export the modules
+export * from "~/store/store-accessor"; // re-export the modules
 
 // Export the root store. You can add mutations & actions here as well.
 // Note that this is a standard Vuex store, not a vuex-module-decorator one.

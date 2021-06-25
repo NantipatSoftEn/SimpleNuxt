@@ -1,13 +1,14 @@
 import {
-  Module,
-  VuexModule,
-  Mutation,
   Action,
+  Module,
+  Mutation,
+  VuexModule,
   getModule
 } from "vuex-module-decorators";
+
 export type Todo = {
-  done: Boolean;
-  text: String;
+  done: boolean;
+  text: string;
 };
 @Module({
   name: "todos",
@@ -18,7 +19,7 @@ export default class TodosModule extends VuexModule {
   list: Array<Todo> = [];
 
   @Mutation
-  add(text: String) {
+  add(text: string) {
     console.log(`add ${text}`);
     this.list.push({
       text,

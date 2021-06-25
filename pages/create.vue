@@ -5,7 +5,7 @@
       <Alert
         :dismissCountDown="dismissCountDown"
         :countDownChanged="countDownChanged"
-        variant="success"
+        type="success"
         message="create success ☀️"
         :dismissSecs="dismissSecs"
       />
@@ -14,8 +14,8 @@
       <Alert
         :dismissCountDown="dismissCountDown"
         :countDownChanged="countDownChanged"
-        variant="danger"
-        message="create sucess"
+        type="danger"
+        message="create fail"
         :dismissSecs="dismissSecs"
       />
     </div>
@@ -70,10 +70,11 @@
           placeholder="Choose a file or drop it here..."
           drop-placeholder="Drop file here..."
           accept=".jpg, .png"
+          @change="onFileChange"
         ></b-form-file>
-        <!-- <div v-for="f in form.file" :key="f.key">
-          <img :src="f" class="preview" />
-        </div> -->
+        <div id="preview">
+          <img v-if="preview" :src="preview" />
+        </div>
       </b-form-group>
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
@@ -95,9 +96,11 @@ export default {
         instrgram: "",
         description: "",
         age: 0,
-        url: ""
+        url: "",
+        date: ""
       },
       imageProfile: null,
+      preview: null,
       show: true,
       dismissSecs: 7,
       dismissCountDown: 0
@@ -111,6 +114,7 @@ export default {
   methods: {
     async onSubmit(event) {
       event.preventDefault();
+      this.form.date = new Date();
       this.form.age = parseInt(this.form.age);
       this.form.url = await this.uploadImageProfile(
         this.imageProfile,
@@ -142,6 +146,10 @@ export default {
     },
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
+    },
+    onFileChange(e) {
+      const file = e.target.files[0];
+      this.preview = URL.createObjectURL(file);
     }
   }
 };
